@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.sql.*;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,32 +15,14 @@ import javax.sql.DataSource;
  * @author brian
  */
 public class AppController extends HttpServlet {
-    private DataSource _ds = null;
-    private Connection _conn = null;
-
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        initConnection();
-    }
-
-    public void initConnection() {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            String url = "jdbc:mysql://localhost:3306/hospital_G004";
-            _conn = DriverManager.getConnection(url,"user_G004","jwusmells");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        DatabaseFactory.getInstance();
     }
 
     public Connection getConnection()
     {
-        if (_conn == null) {
-            initConnection();
-	}
-        return _conn;
+        return DatabaseFactory.getInstance().getConnection();
     }
 
     /**
@@ -56,6 +37,7 @@ public class AppController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Connection _conn = getConnection();
         ResultSet rs = null;
         try {
             String selectStatement = "SELECT * FROM patient";
@@ -74,6 +56,7 @@ public class AppController extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet patientServlet at " + request.getContextPath() + "</h1>");
+            out.println("Testing to see if dbconnection has initialized <br />");
             if (rs != null && rs.next()) {
                 out.println(rs.getString(1));
                 out.println(rs.getString(2));
