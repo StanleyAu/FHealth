@@ -3,6 +3,8 @@
 <html>
 <head>
   <title>Hospital Management Console</title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+  <script src="static/js/common.js"></script>
   <link rel='stylesheet' type='text/css' href='static/css/common.css'>
   <link rel='stylesheet' type='text/css' href='static/css/tables.css'>
 </head>

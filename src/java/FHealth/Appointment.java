@@ -17,7 +17,7 @@ import javax.servlet.http.*;
  */
 public class Appointment extends HttpServlet {
     
- String page="patient_appointment.jsp";
+ String page="jsp/patient_appointment.jsp";
 
  public void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException,IOException {
