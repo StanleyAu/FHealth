@@ -27,7 +27,7 @@ public class AppController extends HttpServlet {
     public void initConnection() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String url = "jdbc:mysql://localhost:3306/ehealth";
+            String url = "jdbc:mysql://localhost:3306/hospital_G004";
             _conn = DriverManager.getConnection(url,"user_G004","jwusmells");
         } catch (SQLException e) {
             e.printStackTrace();
