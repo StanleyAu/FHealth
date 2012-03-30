@@ -1,8 +1,6 @@
 package FHealth;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 /**
  *
@@ -33,5 +31,20 @@ public class DatabaseFactory {
     
     public Connection getConnection() {
         return _conn;
+    }
+    
+    public ResultSet executeQuery(String query) {
+        Connection _conn = getConnection();
+        ResultSet rs = null;
+        try {
+            PreparedStatement pms = _conn.prepareStatement(query);
+            rs = pms.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if (rs == null) {
+            System.out.println("Result set is null");
+        }
+        return rs;
     }
 }
