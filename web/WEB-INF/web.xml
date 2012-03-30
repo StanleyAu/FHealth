@@ -7,6 +7,10 @@
       <res-auth>Container</res-auth>
     </resource-ref>
     <servlet>
+        <servlet-name>Appointment</servlet-name>
+        <servlet-class>FHealth.Appointment</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>testServlet</servlet-name>
         <servlet-class>test.testServlet</servlet-class>
     </servlet>
@@ -22,6 +26,10 @@
     <servlet-mapping>
         <servlet-name>AppController</servlet-name>
         <url-pattern>/AppController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Appointment</servlet-name>
+        <url-pattern>/Appointment</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
