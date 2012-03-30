@@ -4,18 +4,14 @@
  */
 package FHealth;
 
-import FHealth.DatabaseFactory;
 import Auth.UserBean;
-import java.sql.*;
-import java.io.IOException;
-import java.io.PrintWriter;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
-import java.util.ArrayList;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -26,15 +22,10 @@ public class BaseServlet extends HttpServlet {
 
     public ArrayList query(String searchQuery)
             throws SQLException {
-        Connection currentCon = null;
-        Statement stmt = null;
         ResultSet rs = null;
-
         try {
             //connect to DB 
-            currentCon = DatabaseFactory.getInstance().getConnection();
-            stmt = currentCon.createStatement();
-            rs = stmt.executeQuery(searchQuery);
+            rs = DatabaseFactory.getInstance().executeQuery(searchQuery);
 
             ResultSetMetaData md = rs.getMetaData();
             int columns = md.getColumnCount();
@@ -54,20 +45,6 @@ public class BaseServlet extends HttpServlet {
                 } catch (Exception e) {
                 }
                 rs = null;
-            }
-            if (stmt != null) {
-                try {
-                    stmt.close();
-                } catch (Exception e) {
-                }
-                stmt = null;
-            }
-            if (currentCon != null) {
-                try {
-                    currentCon.close();
-                } catch (Exception e) {
-                }
-                currentCon = null;
             }
         }
     }

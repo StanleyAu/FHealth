@@ -1,5 +1,6 @@
 package Auth;
 
+import Auth.Cipher;
 import FHealth.DatabaseFactory;
 import java.math.BigInteger;
 import java.text.*;
@@ -14,24 +15,6 @@ public class UserDAO {
 
     static Connection currentCon = null;
     static ResultSet rs = null;
-
-    public static String generateSalt() {
-        SecureRandom random = new SecureRandom();
-        // Generate 20 char salt (100 bits / 5 <-- 2^5 = 32
-        return new BigInteger(100, random).toString(32);
-    }
-
-    // This belongs somewhere else
-    public static String generateSHA(String text)
-            throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        MessageDigest md = MessageDigest.getInstance("SHA1");
-        byte[] digest = new byte[64];
-        md.update(text.getBytes("utf-16le"), 0, text.length());
-        digest = md.digest();
-
-        BigInteger bi = new BigInteger(1, digest);
-        return String.format("%0" + (digest.length << 1) + "X", bi);
-    }
 
     private static void getName(UserBean bean, int uid, String role)
     {
@@ -133,7 +116,7 @@ public class UserDAO {
                 pw_hash = rs.getString("pw_hash");
                 salt = rs.getString("salt");
                 role = rs.getString("role");
-                if (generateSHA(password + salt).equals(pw_hash)) {
+                if (Cipher.generateSHA(password + salt).equals(pw_hash)) {
                     bean.setValid(true);
                 }
                 // Authenticated, need to get name
