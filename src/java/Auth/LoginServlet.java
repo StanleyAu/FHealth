@@ -5,27 +5,27 @@
 package Auth;
 
 import FHealth.BaseServlet;
-import java.io.IOException;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class LoginServlet extends BaseServlet {
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response)
+    @Override
+    public void processGetRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, java.io.IOException {
         response.sendRedirect("/FHealth/jsp/login.jsp");
     }
     
-    public void doPost(HttpServletRequest request, HttpServletResponse response)
+    @Override
+    public void processPostRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, java.io.IOException {
 
         try {
             UserBean user = new UserBean();
-            user.setUsername(request.getParameter("un"));
-            user.setPassword(request.getParameter("pw"));
+            user.setUsername(request.getParameter("username"));
+            user.setPassword(request.getParameter("password"));
 
             user = UserDAO.login(user);
 
