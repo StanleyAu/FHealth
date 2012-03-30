@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Admin
  */
 @WebServlet(name = "Patient", urlPatterns = {"/Patient"})
-public class Patient extends HttpServlet {
+public class Patient extends BaseServlet {
 
   /**
    * Processes requests for both HTTP
@@ -33,7 +33,7 @@ public class Patient extends HttpServlet {
    * @throws ServletException if a servlet-specific error occurs
    * @throws IOException if an I/O error occurs
    */
-  protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+  protected void processGetRequest(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
     response.setContentType("text/html;charset=UTF-8");
     List dl = new ArrayList();
@@ -73,23 +73,6 @@ public class Patient extends HttpServlet {
       dispatcher.forward(request, response);
     }
   }
-
-  // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-  /**
-   * Handles the HTTP
-   * <code>GET</code> method.
-   *
-   * @param request servlet request
-   * @param response servlet response
-   * @throws ServletException if a servlet-specific error occurs
-   * @throws IOException if an I/O error occurs
-   */
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
-    processRequest(request, response);
-  }
-
 
   /**
    * Returns a short description of the servlet.

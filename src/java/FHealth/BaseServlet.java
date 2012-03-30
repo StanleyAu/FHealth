@@ -5,13 +5,13 @@
 package FHealth;
 
 import Auth.UserBean;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
+import java.sql.*;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -31,4 +31,24 @@ public class BaseServlet extends HttpServlet {
         UserBean user = (UserBean) (session.getAttribute("currentSessionUser"));
         return user; // Should return null if no user in cookie
     }
+    
+    protected void processGetRequest(HttpServletRequest request, HttpServletResponse response)
+          throws ServletException, IOException{
+    }
+    protected void processPostRequest(HttpServletRequest request, HttpServletResponse response)
+          throws ServletException, IOException{
+    }
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+          throws ServletException, IOException {
+      processGetRequest(request, response);
+    }
+    
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+          throws ServletException, IOException {
+      processPostRequest(request, response);
+    }
+    
 }
