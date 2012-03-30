@@ -1,2 +1,4 @@
-web/WEB-INF/*
-*.properties
+build/*
+nbproject/*.properties
+dist/*
+
