@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
     <resource-ref>
-      <description>DB Connection</description>
-      <res-ref-name>jdbc/hospital_G004</res-ref-name>
-      <res-type>javax.sql.DataSource</res-type>
-      <res-auth>Container</res-auth>
+        <description>DB Connection</description>
+        <res-ref-name>jdbc/hospital_G004</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
     </resource-ref>
     <servlet>
         <servlet-name>Appointment</servlet-name>
@@ -19,6 +19,10 @@
         <servlet-class>FHealth.AppController</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>Auth.LoginServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>testServlet</servlet-name>
         <url-pattern>/testServlet</url-pattern>
@@ -30,6 +34,10 @@
     <servlet-mapping>
         <servlet-name>Appointment</servlet-name>
         <url-pattern>/Appointment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login/</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
