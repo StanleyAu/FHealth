@@ -1,7 +1,6 @@
 package Auth;
 
 import FHealth.DatabaseFactory;
-import FHealth.DatabaseFactory;
 import java.math.BigInteger;
 import java.text.*;
 import java.util.*;
