@@ -22,31 +22,7 @@ public class BaseServlet extends HttpServlet {
 
     public ArrayList query(String searchQuery)
             throws SQLException {
-        ResultSet rs = null;
-        try {
-            //connect to DB 
-            rs = DatabaseFactory.getInstance().executeQuery(searchQuery);
-
-            ResultSetMetaData md = rs.getMetaData();
-            int columns = md.getColumnCount();
-            ArrayList list = new ArrayList(50);
-            while (rs.next()) {
-                HashMap row = new HashMap(columns);
-                for (int i = 1; i <= columns; i++) {
-                    row.put(md.getColumnName(i), rs.getObject(i));
-                }
-                list.add(row);
-            }
-            return list;
-        } finally {
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (Exception e) {
-                }
-                rs = null;
-            }
-        }
+        return DatabaseFactory.getInstance().query(searchQuery);
     }
 
     // Will return null if user is not logged in

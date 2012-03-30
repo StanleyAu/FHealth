@@ -1,6 +1,8 @@
 package FHealth;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -53,5 +55,36 @@ public class DatabaseFactory {
             System.out.println("Result set is null");
         }
         return rs;
+    }
+    
+    public ArrayList query(String searchQuery) {
+        ResultSet rs = null;
+        try {
+            //connect to DB 
+            rs = executeQuery(searchQuery);
+
+            ResultSetMetaData md = rs.getMetaData();
+            int columns = md.getColumnCount();
+            ArrayList list = new ArrayList(50);
+            while (rs.next()) {
+                HashMap row = new HashMap(columns);
+                for (int i = 1; i <= columns; i++) {
+                    row.put(md.getColumnName(i), rs.getObject(i));
+                }
+                list.add(row);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (Exception e) {
+                }
+                rs = null;
+            }
+        }
     }
 }
