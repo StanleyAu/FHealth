@@ -10,9 +10,18 @@
         <servlet-name>testServlet</servlet-name>
         <servlet-class>test.testServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AppController</servlet-name>
+        <servlet-class>FHealth.AppController</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
     <servlet-mapping>
         <servlet-name>testServlet</servlet-name>
         <url-pattern>/testServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AppController</servlet-name>
+        <url-pattern>/AppController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
