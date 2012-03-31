@@ -1,5 +1,5 @@
 
-<%@page language="java" import="java.util.*" %>
+<%@page language="java" import="java.util.*, Util.WebUtil" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <% List<String> fields = Arrays.asList(
@@ -10,16 +10,19 @@
             "Address", "address",
             "Phone", "phone",
             "Current Health", "current_health",
-            "Default Doctor", "doctor");%>
+            "Default Doctor", "default_doctor_id");%>
 <html>
     <head>
         <title>Hospital Management Console</title>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
         <script type="text/javascript" src="static/js/common.js"></script>
         <script type="text/javascript" src="static/js/patient.js"></script>
-        <script type="text/javascript">
-            var patient_id = <%=request.getAttribute("patient_id")%>;
-        </script>
+        <%= WebUtil.js_var("patient_id", (Integer)request.getAttribute("patient_id")) %>
+        <%= WebUtil.js_var("doc_data", (ArrayList)request.getAttribute("doc_data")) %>
+        <%= WebUtil.js_var("editable", (Boolean)request.getAttribute("editable")) %>
+        <%= WebUtil.js_var("new_record", (Boolean)request.getAttribute("new_record")) %>
+        <%= (Boolean)request.getAttribute("new_record")?
+            "":WebUtil.js_var("p_data", (HashMap)request.getAttribute("p_data")) %>
         <link rel="stylesheet" type="text/css" href="static/css/common.css"/>
     </head>
     <body>
@@ -47,10 +50,10 @@
             <% }%>
             </div>
             <div class="buttons-container">
-                <% if (editable) { %>
-                <div class="button" id="update">Update</div>
-                <% }else if(new_record) { %>
+                <% if (new_record) { %>
                 <div class="button" id="save">Save</div>
+                <% }else if(editable) { %>
+                <div class="button" id="update">Update</div>
                 <% } %>
             </div>
             <div class="response-text"></div>

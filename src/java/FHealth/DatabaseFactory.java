@@ -60,7 +60,16 @@ public class DatabaseFactory {
             }
         }
     }
-
+    public int update(String query){
+        try{
+            Statement stm = _conn.createStatement();
+            int ret =  stm.executeUpdate(query);
+            return ret;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
     public ArrayList query(String searchQuery) {
         PreparedStatement pms = null;
         ResultSet rs = null;
