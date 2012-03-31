@@ -20,8 +20,7 @@ import javax.servlet.http.HttpSession;
  */
 public class BaseServlet extends HttpServlet {
 
-    public ArrayList query(String searchQuery)
-            throws SQLException {
+    public ArrayList query(String searchQuery){
         return DatabaseFactory.getInstance().query(searchQuery);
     }
 

@@ -37,38 +37,27 @@ public class Patient extends BaseServlet {
   protected void processGetRequest(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
     response.setContentType("text/html;charset=UTF-8");
-    List dl = new ArrayList();
-    try {
-      Connection conn = DatabaseFactory.getInstance()
-        .getConnection();
-      String sql = "select * from patient where id = 1";
-      Statement s = conn.createStatement();
-      s.executeQuery(sql);
-      ResultSet rs = s.getResultSet();
-      
-      /*
-       * TODO output your page here. You may use following sample code.
-       */
-      rs.next();
-      dl.add(rs.getInt("id"));
-      dl.add(rs.getString("first_name"));
-      dl.add(rs.getString("last_name"));
-      dl.add(rs.getString("OHIP"));
-      dl.add(rs.getString("SIN"));
-      dl.add(rs.getString("address"));
-      dl.add(rs.getString("phone"));
-      dl.add(rs.getString("current_health"));
-      dl.add(rs.getInt("default_doctor_id"));
-      
-      rs.close();
-      
-      
-    } catch (SQLException  e){
-      e.printStackTrace();
+    Integer p_id = Integer.parseInt(request.getParameter("patient_id"));
+    String sql = String.format(
+            "SELECT p.first_name 'First Name',"
+            + "p.last_name 'Last Name',"
+            + "p.OHIP 'OHIP',"
+            + "p.SIN 'SIN',"
+            + "p.address 'Address',"
+            + "p.phone 'Phone',"
+            + "p.current_health 'Current Health',"
+            + "concat(d.first_name, ' ', d.last_name) doctor "
+            + "from patient p left join "
+            + "doctor d on p.default_doctor_id = d.id "
+            + "where p.id = %d", p_id);
+    ArrayList p_data = query(sql);
+    if (p_data.isEmpty()){
+      PrintWriter out = response.getWriter();
+      out.print("invalid patient id");
+      return;
     }
-    finally{
-    }
-    request.setAttribute("data", dl);
+    System.out.println(p_data.get(0));
+    request.setAttribute("p_data", p_data.get(0));
     RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/patient.jsp");
     if (dispatcher != null){
       dispatcher.forward(request, response);
