@@ -21,41 +21,60 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "Patient", urlPatterns = {"/Patient"})
 public class Patient extends BaseServlet {
-
-    /**
-     * Processes requests for both HTTP
-     * <code>GET</code> and
-     * <code>POST</code> methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+ 
+    @Override
+    protected void processPostRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        String s_param;
+        
+    }
     @Override
     protected void processGetRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        Integer p_id = Integer.parseInt(request.getParameter("patient_id"));
-        String sql = String.format(
-                "SELECT p.first_name 'First Name',"
-                + "p.last_name 'Last Name',"
-                + "p.OHIP 'OHIP',"
-                + "p.SIN 'SIN',"
-                + "p.address 'Address',"
-                + "p.phone 'Phone',"
-                + "p.current_health 'Current Health',"
-                + "concat(d.first_name, ' ', d.last_name) doctor "
-                + "from patient p left join "
-                + "doctor d on p.default_doctor_id = d.id "
-                + "where p.id = %d", p_id);
-        ArrayList p_data = query(sql);
-        if (p_data.isEmpty()) {
-            PrintWriter out = response.getWriter();
-            out.print("invalid patient id");
-            return;
+        String s_param;
+        
+        s_param = request.getParameter("patient_id");
+        Integer p_id = (s_param == null)?null:Integer.parseInt(s_param);
+        
+        s_param = request.getParameter("new_record");
+        Boolean new_record = (s_param == null)?Boolean.FALSE:Boolean.parseBoolean(s_param);
+        
+        s_param = request.getParameter("editable");
+        System.out.println(s_param);
+        Boolean editable = (s_param == null)?Boolean.FALSE:Boolean.parseBoolean(s_param);
+        System.out.println(editable);
+        
+        request.setAttribute("new_record", new_record);
+        request.setAttribute("editable", editable);
+        request.setAttribute("patient_id", p_id);
+        if (!new_record){
+            if (p_id == null){
+                PrintWriter out = response.getWriter();
+                out.print("need patient id");
+                return;
+            }
+            String sql = String.format(
+                    "SELECT p.first_name 'First Name',"
+                    + "p.last_name 'Last Name',"
+                    + "p.OHIP 'OHIP',"
+                    + "p.SIN 'SIN',"
+                    + "p.address 'Address',"
+                    + "p.phone 'Phone',"
+                    + "p.current_health 'Current Health',"
+                    + "concat(d.first_name, ' ', d.last_name) doctor "
+                    + "from patient p left join "
+                    + "doctor d on p.default_doctor_id = d.id "
+                    + "where p.id = %d", p_id);
+            ArrayList p_data = query(sql);
+            if (p_data.isEmpty()) {
+                PrintWriter out = response.getWriter();
+                out.print("invalid patient id");
+                return;
+            }
+            request.setAttribute("p_data", p_data.get(0));
         }
-        request.setAttribute("p_data", p_data.get(0));
         RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/patient.jsp");
         if (dispatcher != null) {
             dispatcher.forward(request, response);

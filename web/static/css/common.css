@@ -38,18 +38,18 @@ body {
 
 .content {
   display: inline-block;
-  margin-top: 10px;
+  margin: 10px 0 0 15px;
 }
 
 .content label{
   font-size: 1.2em;
   display: inline-block;
-  padding: 5px 0 0 15px;
+  padding-top: 5px;
   width: 200px;
 }
 
 .buttons-container {
-  margin: 15px 3px;
+  margin: 15px 0 5px 0;
   text-align: right;
 }
 
@@ -61,6 +61,11 @@ body {
   cursor: pointer;
   border-radius: 8px;
   moz-border-radius: 15px;
+}
+
+.content .response-text {
+  font-size: 1.1em;
+  text-align: right;
 }
 
 .hide {
