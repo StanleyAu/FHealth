@@ -36,7 +36,7 @@
                 String lastname = (String)hm.get("last_name");
             %>
             <tr class='<%=table_css%>'>
-            <td><a href=<%="/finance?fname="+firstname+"&lname="+lastname%>><%=firstname+" "+lastname%></a></td>
+            <td><a href=<%="/FHealth/finance?fname="+firstname+"&lname="+lastname%>><%=firstname+" "+lastname%></a></td>
             </tr>
             <%i++;}%>
         </tbody>

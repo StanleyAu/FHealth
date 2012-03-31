@@ -4,10 +4,10 @@
  */
 package FHealth;
 
+import com.google.gson.Gson;
 import java.io.IOException;
-import java.sql.ResultSet;
+import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -57,9 +57,10 @@ public class Finance extends BaseServlet {
             String afterdate = request.getParameter("afterDate");
             List dl = new ArrayList();
             try {
-                String sql = String.format("select * from appointment where dt BETWEEN Date('%s') AND Date('%s')", 
-                                            beforedate, 
-                                            afterdate);
+                //String sql = String.format("select * from appointment where dt BETWEEN Date('%s') AND Date('%s')", 
+                //                            beforedate, 
+                //                            afterdate);
+                String sql = "Select * from appointment";
                 dl = query(sql);
 
             } catch (SQLException  e){
@@ -75,7 +76,24 @@ public class Finance extends BaseServlet {
     
     protected void processPostRequest(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException{
-             
+        response.setContentType("text/html;charset=UTF-8");
+            //Date comes in the YY/MM/DD format
+            String beforedate = request.getParameter("beforeDate");
+            String afterdate = request.getParameter("afterDate");
+            List dl;
+            String json = "";
+            try {
+                String sql = String.format("select * from appointment where dt BETWEEN Date('%s') AND Date('%s')", 
+                                            beforedate, 
+                                            afterdate);
+                dl = query(sql);
+                json = new Gson().toJson(dl, ArrayList.class);
+            } catch (SQLException  e){
+                e.printStackTrace();
+            }
+            response.setContentType("application/json");
+            PrintWriter out = response.getWriter();
+            out.write(json);
     }
     /**
      * Returns a short description of the servlet.

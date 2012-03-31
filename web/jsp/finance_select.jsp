@@ -9,6 +9,7 @@
   <script src="static/js/financeselect.js"></script>
   <link rel='stylesheet' type='text/css' href='static/css/common.css'>
   <link rel='stylesheet' type='text/css' href='static/css/tables.css'>
+  <link rel='stylesheet' type='text/css' href='static/css/jquery-ui-1.8.18.custom.css'>
 </head>
 <body>
   <div class="top-bar-wrapper">
@@ -22,10 +23,10 @@
   <div class="content">
     <h1 class="titleblock">Doctor Name</h1>
     <div>
-        <form action="../finance" method="POST">
+        <form action="FHealth/finance" method="POST">
             <input type="text" id="beforeDate" value="">
             <input type="text" id="afterDate" value="">
-            <input type="submit" value="Submit" />
+            <input type="button" id="submitAppt" value="Submit" />
         </form>
     </div>
     <table>
@@ -41,11 +42,10 @@
             {
                 table_css = (i % 2 == 0)?"second":"";
                 HashMap hm = (HashMap) itr.next();
-                String firstname = (String)hm.get("patient_id");
-                String lastname = (String)hm.get("doctor_id");
+                String firstname = Integer.toString((Integer)hm.get("patient_id"));
             %>
             <tr class='<%=table_css%>'>
-            <td><a href=<%="FHealth/finance?fname="+firstname+"&lname="+lastname%>><%=firstname+" "+lastname%></a></td>
+            <td><%=firstname%></td>
             </tr>
             <%i++;}%>
         </tbody>
