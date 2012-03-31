@@ -4,7 +4,9 @@
 <head>
   <title>Hospital Management Console</title>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
   <script src="static/js/common.js"></script>
+  <script src="static/js/financeselect.js"></script>
   <link rel='stylesheet' type='text/css' href='static/css/common.css'>
   <link rel='stylesheet' type='text/css' href='static/css/tables.css'>
 </head>
@@ -18,30 +20,32 @@
     </div>
   </div>
   <div class="content">
-    <h1 class="titleblock">Patient Name</h1>
+    <h1 class="titleblock">Doctor Name</h1>
+    <div>
+        <form action="../finance" method="POST">
+            <input type="text" id="beforeDate" value="">
+            <input type="text" id="afterDate" value="">
+            <input type="submit" value="Submit" />
+        </form>
+    </div>
     <table>
         <thead>
             <tr>
-                <th>Date</th>
-                <th>Duration</th>
-                <th>Doctor</th>
-                <th>Appointment Status</th>
-                <th>Diagnosis</th>
+                <th>Appointments</th>
             </tr>
         </thead>
-        <tbody>
-            <%! Iterator itr; int i = 1; String table_css; %>
+        <tbody id="apptbody">
+                        <%! Iterator itr; int i = 1; String table_css; %>
             <% List data = (List)request.getAttribute("data");
                         for (itr=data.iterator(); itr.hasNext(); )
             {
                 table_css = (i % 2 == 0)?"second":"";
+                HashMap hm = (HashMap) itr.next();
+                String firstname = (String)hm.get("patient_id");
+                String lastname = (String)hm.get("doctor_id");
             %>
             <tr class='<%=table_css%>'>
-            <td><%=itr.next()%></td>
-            <td><%=itr.next()%></td>
-            <td><%=itr.next()%></td>
-            <td><%=itr.next()%></td>
-            <td><%=itr.next()%></td>
+            <td><a href=<%="FHealth/finance?fname="+firstname+"&lname="+lastname%>><%=firstname+" "+lastname%></a></td>
             </tr>
             <%i++;}%>
         </tbody>
@@ -49,3 +53,4 @@
   </div>
 </body>
 </html>
+

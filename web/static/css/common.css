@@ -66,3 +66,7 @@ body {
 .hide {
   display: none!important;
 }
+
+h1.titleblock {
+    margin-left:10px;
+}

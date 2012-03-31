@@ -21,7 +21,6 @@ public class LoginServlet extends BaseServlet {
     @Override
     public void processPostRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, java.io.IOException {
-
         try {
             UserBean user = new UserBean();
             user.setUsername(request.getParameter("username"));

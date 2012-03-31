@@ -5,6 +5,7 @@
   <title>Hospital Management Console</title>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
   <script src="static/js/common.js"></script>
+  <script src="static/js/financelist.js"></script>
   <link rel='stylesheet' type='text/css' href='static/css/common.css'>
   <link rel='stylesheet' type='text/css' href='static/css/tables.css'>
 </head>
@@ -18,15 +19,10 @@
     </div>
   </div>
   <div class="content">
-    <h1 class="titleblock">Patient Name</h1>
     <table>
         <thead>
             <tr>
-                <th>Date</th>
-                <th>Duration</th>
-                <th>Doctor</th>
-                <th>Appointment Status</th>
-                <th>Diagnosis</th>
+                <th>Doctors</th>
             </tr>
         </thead>
         <tbody>
@@ -35,13 +31,12 @@
                         for (itr=data.iterator(); itr.hasNext(); )
             {
                 table_css = (i % 2 == 0)?"second":"";
+                HashMap hm = (HashMap) itr.next();
+                String firstname = (String)hm.get("first_name");
+                String lastname = (String)hm.get("last_name");
             %>
             <tr class='<%=table_css%>'>
-            <td><%=itr.next()%></td>
-            <td><%=itr.next()%></td>
-            <td><%=itr.next()%></td>
-            <td><%=itr.next()%></td>
-            <td><%=itr.next()%></td>
+            <td><a href=<%="/finance?fname="+firstname+"&lname="+lastname%>><%=firstname+" "+lastname%></a></td>
             </tr>
             <%i++;}%>
         </tbody>
@@ -49,3 +44,4 @@
   </div>
 </body>
 </html>
+

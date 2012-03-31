@@ -44,12 +44,6 @@ public class DatabaseFactory {
             rs = pms.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                pms.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         if (rs == null) {
             System.out.println("Result set is null");
