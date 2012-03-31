@@ -37,28 +37,20 @@ public class UpdateDefaultDoctor extends BaseServlet {
           throws ServletException, IOException {
             if (request.getParameter("fname") == null || request.getParameter("lname") == null) {
             response.setContentType("text/html;charset=UTF-8");
-            List dl = new ArrayList();
-            try {
-                String sql = "SELECT concat(patient.id) AS p_id, "
-                        + "concat(patient.first_name) AS p_first_name, "
-                        + "concat(patient.last_name) AS p_last_name, "
-                        + "concat(doctor.id) AS d_id "
-                        + "FROM patient INNER JOIN doctor "
-                        + "ON patient.default_doctor_id = doctor.id";
-                dl = query(sql);
-            } catch (SQLException  e){
-                e.printStackTrace();
-            }
+            List dl;
+            String sql = "SELECT concat(patient.id) AS p_id, "
+                    + "concat(patient.first_name) AS p_first_name, "
+                    + "concat(patient.last_name) AS p_last_name, "
+                    + "concat(doctor.id) AS d_id "
+                    + "FROM patient INNER JOIN doctor "
+                    + "ON patient.default_doctor_id = doctor.id";
+            dl = query(sql);
             request.setAttribute("data", dl);
             List doctors = new ArrayList();
-            try {
-                String sql = "SELECT id, first_name, last_name "
-                        + "FROM doctor "
-                        + "ORDER BY id";
-                doctors = query(sql);
-            } catch (SQLException  e){
-                e.printStackTrace();
-            }
+            sql = "SELECT id, first_name, last_name "
+                    + "FROM doctor "
+                    + "ORDER BY id";
+            doctors = query(sql);
             
             request.setAttribute("doctors", doctors);
             RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/update_default_doctor.jsp");
@@ -71,16 +63,10 @@ public class UpdateDefaultDoctor extends BaseServlet {
             //Date comes in the YY/MM/DD format
             String beforedate = request.getParameter("beforeDate");
             String afterdate = request.getParameter("afterDate");
-            List dl = new ArrayList();
-            try {
-                String sql = String.format("select * from appointment where dt BETWEEN Date('%s') AND Date('%s')", 
-                                            beforedate, 
-                                            afterdate);
-                dl = query(sql);
-
-            } catch (SQLException  e){
-                e.printStackTrace();
-            }
+            String sql = String.format("select * from appointment where dt BETWEEN Date('%s') AND Date('%s')", 
+                                        beforedate, 
+                                        afterdate);
+            List dl = query(sql);
             request.setAttribute("data", dl);
             RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/update_default_doctor.jsp");
             if (dispatcher != null){

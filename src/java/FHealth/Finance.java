@@ -36,14 +36,8 @@ public class Finance extends BaseServlet {
           throws ServletException, IOException {
             if (request.getParameter("fname") == null || request.getParameter("lname") == null) {
             response.setContentType("text/html;charset=UTF-8");
-            List dl = new ArrayList();
-            try {
-                String sql = "select * from doctor";
-                dl = query(sql);
-
-            } catch (SQLException  e){
-                e.printStackTrace();
-            }
+            String sql = "select * from doctor";
+            List dl = query(sql);
             request.setAttribute("data", dl);
             RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/finance_list.jsp");
             if (dispatcher != null){
@@ -55,17 +49,8 @@ public class Finance extends BaseServlet {
             //Date comes in the YY/MM/DD format
             String beforedate = request.getParameter("beforeDate");
             String afterdate = request.getParameter("afterDate");
-            List dl = new ArrayList();
-            try {
-                //String sql = String.format("select * from appointment where dt BETWEEN Date('%s') AND Date('%s')", 
-                //                            beforedate, 
-                //                            afterdate);
-                String sql = "Select * from appointment";
-                dl = query(sql);
-
-            } catch (SQLException  e){
-                e.printStackTrace();
-            }
+            String sql = "Select * from appointment";
+            List dl = query(sql);
             request.setAttribute("data", dl);
             RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/finance_select.jsp");
             if (dispatcher != null){
@@ -80,17 +65,11 @@ public class Finance extends BaseServlet {
             //Date comes in the YY/MM/DD format
             String beforedate = request.getParameter("beforeDate");
             String afterdate = request.getParameter("afterDate");
-            List dl;
-            String json = "";
-            try {
-                String sql = String.format("select * from appointment where dt BETWEEN Date('%s') AND Date('%s')", 
-                                            beforedate, 
-                                            afterdate);
-                dl = query(sql);
-                json = new Gson().toJson(dl, ArrayList.class);
-            } catch (SQLException  e){
-                e.printStackTrace();
-            }
+            String sql = String.format("select * from appointment where dt BETWEEN Date('%s') AND Date('%s')", 
+                                        beforedate, 
+                                        afterdate);
+            List dl = query(sql);
+            String json = new Gson().toJson(dl, ArrayList.class);
             response.setContentType("application/json");
             PrintWriter out = response.getWriter();
             out.write(json);
