@@ -27,6 +27,10 @@
         <servlet-name>Finance</servlet-name>
         <servlet-class>FHealth.Finance</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateDefaultDoctor</servlet-name>
+        <servlet-class>FHealth.UpdateDefaultDoctor</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>testServlet</servlet-name>
         <url-pattern>/testServlet</url-pattern>
@@ -46,6 +50,10 @@
     <servlet-mapping>
         <servlet-name>Finance</servlet-name>
         <url-pattern>/finance</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateDefaultDoctor</servlet-name>
+        <url-pattern>/UpdateDefaultDoctor</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
