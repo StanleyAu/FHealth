@@ -15,40 +15,35 @@ import javax.servlet.http.*;
  *
  * @author Yeung
  */
-public class Appointment extends HttpServlet {
-    
- String page="jsp/patient_appointment.jsp";
+public class Appointment extends BaseServlet {
 
- public void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException,IOException {
-    Connection conn = DatabaseFactory.getInstance().getConnection();  
-    PrintWriter out = response.getWriter();
-    ResultSet rs;
-    //Establish connection to MySQL database
-    String sql = "select dt, duration, doctor_id, status, latest_diagnosis_id from appointment";        
-    List dataList = new ArrayList(); 
-    try {
-        PreparedStatement pms = conn.prepareStatement(sql);
-        rs = pms.executeQuery();
-        while (rs.next ()){
-            //Add records into data list
-            dataList.add(rs.getTimestamp("dt"));
-            dataList.add(rs.getInt("duration"));
-            dataList.add(rs.getInt("doctor_id"));
-            dataList.add(rs.getString("status"));
-            dataList.add(rs.getInt("latest_diagnosis_id"));
+    String page = "jsp/patient_appointment.jsp";
+
+    @Override
+    public void processGetRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        Integer p_id = Integer.parseInt(request.getParameter("patient_id"));
+        String sql = String.format(
+                "select dt,"
+                + "duration,"
+                + "concat(first_name,' ',last_name) doctor,"
+                + "status, diagnosis, prescriptions, "
+                + "comments, procedures "
+                + "from appointment a "
+                + "join doctor doc on a.doctor_id = doc.id "
+                + "left join diagnosis d on a.latest_diagnosis_id = d.id "
+                + "where a.patient_id = %d", p_id);
+
+        System.out.println(sql);
+        ArrayList pas_data = query(sql);
+        System.out.println(pas_data);
+        request.setAttribute("pas_data", pas_data);
+
+        //Disptching request
+        RequestDispatcher dispatcher = request.getRequestDispatcher(page);
+        if (dispatcher != null) {
+            dispatcher.forward(request, response);
         }
-        rs.close ();
     }
-    catch(Exception e){
-        System.out.println("Exception is ;"+e);
-    }
-    request.setAttribute("data",dataList);
-    
-    //Disptching request
-    RequestDispatcher dispatcher = request.getRequestDispatcher(page);
-    if (dispatcher != null){
-        dispatcher.forward(request, response);
-    } 
-  }
 }
