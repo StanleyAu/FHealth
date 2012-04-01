@@ -12,6 +12,7 @@
         <script src="static/js/common.js"></script>
         <link rel='stylesheet' type='text/css' href='static/css/common.css'>
         <link rel='stylesheet' type='text/css' href='static/css/tables.css'>
+        
     </head>
     <body>
         <div class="top-bar-wrapper">

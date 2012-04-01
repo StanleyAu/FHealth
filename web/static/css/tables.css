@@ -1,23 +1,29 @@
 .content table{
+  background-color: #CDCDCD;
   width: 600px;
-  background-color: #ffffff;
 }
 
 .content table th{
-  color: #ffffff;
-  background-color: #2554c7;
+  background-color: #e6EEEE;
+  border: 1px solid #FFF;
   font-size: 1.2em;
   padding: 3px 0;
 }
 
 .content table td{
-  background-color: #bdedff;
+  color: #3D3D3D;
   font-size: 1em;
   text-align: center;
+  padding: 4px;
+  background-color: #FFF;
+  vertical-align: top;
 }
 
 .content table .second td{
-  background-color: #cfecec;
+  color: #3D3D3D;
   font-size: 1em;
   text-align: center;
+  padding: 4px;
+  background-color: #F0F0F6;
+  vertical-align: top;
 }

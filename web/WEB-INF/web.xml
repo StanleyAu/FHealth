@@ -39,6 +39,10 @@
         <servlet-name>Diagnosis</servlet-name>
         <servlet-class>FHealth.Diagnosis</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Doctor</servlet-name>
+        <servlet-class>FHealth.Doctor</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>testServlet</servlet-name>
         <url-pattern>/testServlet</url-pattern>
@@ -64,13 +68,16 @@
         <url-pattern>/UpdateDefaultDoctor</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Diagnosis</servlet-name>
         <url-pattern>/diagnosis</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Doctor</servlet-name>
+        <url-pattern>/Doctor</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
