@@ -16,7 +16,7 @@ import java.util.ArrayList;
  *
  * @author Stan
  */
-public class RegisterServlet extends BaseServlet {
+public class RegisterServlet extends AuthServlet {
 
     @Override
     public void processGetRequest(HttpServletRequest request, HttpServletResponse response)

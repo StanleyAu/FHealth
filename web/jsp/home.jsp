@@ -8,7 +8,7 @@
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
         <script type="text/javascript" src="static/js/common.js"></script>
         <%=WebUtil.js_var("menu_items", request.getAttribute("menu_items"))%>
-        <%=WebUtil.js_var("uid", request.getAttribute("uid"))%>
+        <%=WebUtil.js_var("user", request.getAttribute("user"))%>
         <title>Hospital Management Console</title>
     </head>
     <body>

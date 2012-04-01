@@ -5,6 +5,7 @@
 --%>
 
 <%@page language="java" %>
+<%@page import="Util.WebUtil"%>
 <%@page import="java.util.*"%>
 <%@page import="java.util.Map.Entry"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -15,6 +16,8 @@
         <title>Hospital Management Console - Login</title>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
         <script src="static/js/common.js"></script>
+        <%=WebUtil.js_var("menu_items", request.getAttribute("menu_items"))%>
+        <%=WebUtil.js_var("user", request.getAttribute("user"))%>
         <link rel="stylesheet" type="text/css" href="static/css/common.css"/>
     </head>
     <body>
@@ -23,7 +26,6 @@
         </div>
         <div class="left-pane-container">
             <div class="left-pane">
-                <div class="menu-item">MENU ITEM</div>
             </div>
         </div>
         <div class="content">
@@ -62,7 +64,7 @@
                 }
                 %>
                 <div class="buttons-container">
-                    <input type="submit" name="submit" value="Login" />
+                    <input type="submit" name="submit" value="Register" />
                 </div>
             </form>
         </div>

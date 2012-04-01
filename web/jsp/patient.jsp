@@ -13,17 +13,18 @@
             "Default Doctor", "default_doctor_id");%>
 <html>
     <head>
-        <title>Hospital Management Console</title>
+        <link rel="stylesheet" type="text/css" href="static/css/common.css"/>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
         <script type="text/javascript" src="static/js/common.js"></script>
         <script type="text/javascript" src="static/js/patient.js"></script>
-        <%= WebUtil.js_var("patient_id", (Integer)request.getAttribute("patient_id")) %>
         <%= WebUtil.js_var("doc_data", (ArrayList)request.getAttribute("doc_data")) %>
         <%= WebUtil.js_var("editable", (Boolean)request.getAttribute("editable")) %>
         <%= WebUtil.js_var("new_record", (Boolean)request.getAttribute("new_record")) %>
         <%= (Boolean)request.getAttribute("new_record")?
             "":WebUtil.js_var("p_data", (HashMap)request.getAttribute("p_data")) %>
-        <link rel="stylesheet" type="text/css" href="static/css/common.css"/>
+        <%=WebUtil.js_var("menu_items", request.getAttribute("menu_items"))%>
+        <%=WebUtil.js_var("user", request.getAttribute("user"))%>
+        <title>Hospital Management Console</title>
     </head>
     <body>
         <div class="top-bar-wrapper">
@@ -31,10 +32,6 @@
         </div>
         <div class="left-pane-container">
             <div class="left-pane">
-                <% Object menu_items[] = (Object[])request.getAttribute("menu_items");
-                for (int i=0; i<menu_items.length; i++){ %>
-                <div class="menu-item"><%= menu_items[i].toString() %></div>
-                <% } %>
             </div>
         </div>
         <div class="content">

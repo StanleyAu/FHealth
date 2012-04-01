@@ -21,7 +21,6 @@ hor     : Stan
         </div>
         <div class="left-pane-container">
             <div class="left-pane">
-                <div class="menu-item">MENU ITEM</div>
             </div>
         </div>
         <div class="content">

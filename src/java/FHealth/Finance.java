@@ -4,10 +4,10 @@
  */
 package FHealth;
 
+import Auth.AuthServlet;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -16,12 +16,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 /**
  *
  * @author brian
  */
 @WebServlet(name = "Finance", urlPatterns = {"/finance"})
-public class Finance extends BaseServlet {
+public class Finance extends AuthServlet {
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
