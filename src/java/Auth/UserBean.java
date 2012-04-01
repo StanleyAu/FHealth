@@ -113,8 +113,6 @@ public class UserBean {
                         ((ArrayList)role_actions.get(i)).clone());
             }
         }
-        System.err.println(role_actions);
-        System.err.println(menuItems);
         return menuItems;
     }
     
