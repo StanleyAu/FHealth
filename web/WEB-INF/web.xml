@@ -73,7 +73,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Doctor</servlet-name>
-        <url-pattern>/Doctor</url-pattern>
+        <url-pattern>/doctor</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DoctorList</servlet-name>
