@@ -10,9 +10,20 @@ $(document).ready(function () {
            url: "/FHealth/finance",
            data: {"beforeDate":beforedate, "afterDate":afterdate},
            success: function(json) {
-            $.each(json, function(rows, columns){
-                $("#apptbody").html('<tr><td>'+columns.dt+'</td></tr>');
+            var i = 1;
+            var htmlString = '';
+            $("#apptbody").empty();
+            $.each(json, function(rows, columns) {
+                var classname = (i % 2 == 1) ? "" : "second";
+                
+                htmlString += ('<tr class=\"'+classname+'\">'+
+                                    '<td>'+columns.dt+'</td>'+
+                                    '<td>'+columns.duration+'</td>'+
+                                    '<td>'+columns.status+'</td>'+
+                                    '</tr>');
+                i++;
             })
+            $("#apptbody").html(htmlString);
            }
        });
    });

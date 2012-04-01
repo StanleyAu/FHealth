@@ -31,12 +31,11 @@ public class Diagnosis extends BaseServlet {
         HashMap p_data= WebUtil.gson.fromJson(p_json, HashMap.class);
         if (op.equals("save")){
             String sql = String.format("insert into diagnosis "
-                    + "(appointment_id, diagnosis, prescriptions, comments, "
+                    + "(appointment_id, diagnosis, comments, "
                     + "procedures) "
                     + "values(%s,'%s','%s','%s', '%s')",
                     (String)p_data.get("appointment_id"),
                     (String)p_data.get("diagnosis"),
-                    (String)p_data.get("prescriptions"),
                     (String)p_data.get("comments"),
                     (String)p_data.get("procedures"));
             int ret = update(sql);
@@ -75,7 +74,7 @@ public class Diagnosis extends BaseServlet {
             ArrayList p_data = query(sql);
             if (p_data == null || p_data.isEmpty()) {
                 PrintWriter out = response.getWriter();
-                out.print("invalid appointment id for diagnosis");
+                out.print("No Diagnosis for specified data");
                 return;
             }
             request.setAttribute("p_data", p_data.get(p_data.size()-1));

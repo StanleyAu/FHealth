@@ -49,7 +49,12 @@ public class Finance extends BaseServlet {
             //Date comes in the YY/MM/DD format
             String beforedate = request.getParameter("beforeDate");
             String afterdate = request.getParameter("afterDate");
-            String sql = "Select * from appointment";
+            String sql = "select dt,"
+                            + "duration,"
+                            + "concat(first_name,' ',last_name) patient,"
+                            + "status, concat(a.id) appointment_id "
+                            + "from appointment a "
+                            + "INNER JOIN patient p on a.patient_id = p.id";
             List dl = query(sql);
             request.setAttribute("data", dl);
             RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/finance_select.jsp");
@@ -65,7 +70,13 @@ public class Finance extends BaseServlet {
             //Date comes in the YY/MM/DD format
             String beforedate = request.getParameter("beforeDate");
             String afterdate = request.getParameter("afterDate");
-            String sql = String.format("select * from appointment where dt BETWEEN Date('%s') AND Date('%s')", 
+            String sql = String.format("select dt,"
+                                        + "duration,"
+                                        + "concat(first_name,' ',last_name) patient,"
+                                        + "status, concat(a.id) appointment_id "
+                                        + "from appointment a "
+                                        + "INNER JOIN patient p on a.patient_id = p.id"
+                                        + "where dt BETWEEN Date('%s') AND Date('%s')", 
                                         beforedate, 
                                         afterdate);
             List dl = query(sql);

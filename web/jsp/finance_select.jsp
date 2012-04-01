@@ -1,4 +1,9 @@
 <%@ page language="java" import="java.util.*" import="javax.servlet.*" %>
+<% List<String> fields = Arrays.asList(
+            "Date", "dt",
+            "Duration", "duration",
+            "Status", "status",
+            "Patient", "patient");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,25 +34,29 @@
             <input type="button" id="submitAppt" value="Submit" />
         </form>
     </div>
+    </br>
     <table>
-        <thead>
-            <tr>
-                <th>Appointments</th>
-            </tr>
-        </thead>
+        <thead><tr>
+            <% for (int i = 0; i < fields.size(); i += 2) {%>
+            <th><%= fields.get(i)%></th>
+            <% }%>
+            <th>Diagnosis</th>
+        </tr></thead>
         <tbody id="apptbody">
-                        <%! Iterator itr; int i = 1; String table_css; %>
-            <% List data = (List)request.getAttribute("data");
-                        for (itr=data.iterator(); itr.hasNext(); )
-            {
-                table_css = (i % 2 == 0)?"second":"";
-                HashMap hm = (HashMap) itr.next();
-                String firstname = Integer.toString((Integer)hm.get("patient_id"));
+            <%
+                ArrayList pas_data = (ArrayList) request.getAttribute("data");
+                String table_css = "";
+                for (Integer i = 0; i < pas_data.size(); i++) {
+                    table_css = (i % 2 != 0) ? "second" : "";
             %>
-            <tr class='<%=table_css%>'>
-            <td><%=firstname%></td>
+            <tr id='<%= i.toString()%>' class='<%= table_css%>'>
+                <% HashMap pa_data = (HashMap) pas_data.get(i);
+                for (int j = 0; j < fields.size(); j += 2) {%>
+                <td><%= pa_data.get(fields.get(j + 1))%></td>                
+                <% }%>
+                <td><a href=<%="/FHealth/diagnosis?appointment_id="+pa_data.get("appointment_id")+"&new_record=False&editable=False"%>>More Info</a></td>
             </tr>
-            <%i++;}%>
+            <%}%>
         </tbody>
     </table>
   </div>
