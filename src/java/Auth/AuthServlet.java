@@ -48,6 +48,7 @@ public class AuthServlet extends BaseServlet {
             throws ServletException, IOException {
         if (this.isAuthValid(request, response)) {
             request.setAttribute("menu_items", authMenuItems());
+            request.setAttribute("uid", currentUser.getUID());
             processGetRequest(request, response);
         }
     }

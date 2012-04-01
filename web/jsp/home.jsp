@@ -3,12 +3,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Hospital Management Console</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="static/css/common.css"/>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
         <script type="text/javascript" src="static/js/common.js"></script>
         <%=WebUtil.js_var("menu_items", request.getAttribute("menu_items"))%>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <%=WebUtil.js_var("uid", request.getAttribute("uid"))%>
+        <title>Hospital Management Console</title>
     </head>
     <body>
         <div class="top-bar-wrapper">

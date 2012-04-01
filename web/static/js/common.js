@@ -10,7 +10,7 @@ function make_menu_role(role){
 
 function make_role_action(action){
   var role_action = "<div class='role-item'><a href='"
-      +action[1]+"'>"+action[0]+"</a></div>";
+      +action[1].replace('$(uid)', window.uid)+"'>"+action[0]+"</a></div>";
   return role_action;  
 }
 
