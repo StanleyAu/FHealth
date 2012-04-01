@@ -2,6 +2,7 @@ package Auth;
 
 import java.util.HashMap;
 import java.util.Set;
+import java.util.Collection;
 
 public class UserBean {
 
@@ -45,6 +46,13 @@ public class UserBean {
     
     public Set getRoles() {
         return roles.keySet();
+    }
+    
+    // Only useful during registration
+    // IDs are supposed to be id in role records
+    // But for registration, it will be id of role
+    public Collection<Integer> getRoleIDs() {
+        return roles.values();
     }
     
     public int getRoleId(String role) {

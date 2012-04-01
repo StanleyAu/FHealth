@@ -67,6 +67,7 @@ public class DatabaseFactory {
     }
 
     public int update(String query) {
+        boolean batch = false;
         Statement stm = null;
         try {
             stm = _conn.createStatement();
@@ -87,8 +88,21 @@ public class DatabaseFactory {
     }
     
     public int update(PreparedStatement pms) {
+        return this.update(pms, false);
+    }
+    
+    public int update(PreparedStatement pms, boolean batch) {
+        int ret = 1;
         try {
-            int ret = pms.executeUpdate();
+            if (batch) {
+                int[] rets = pms.executeBatch();
+                for (int i=0; i < rets.length; i++) {
+                    ret = ret & rets[i];
+                }
+            }
+            else {
+                ret = pms.executeUpdate();
+            }
             return ret;
         } catch (SQLException e) {
             e.printStackTrace();

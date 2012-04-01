@@ -4,6 +4,7 @@
  */
 package FHealth;
 
+import Auth.AuthServlet;
 import Util.WebUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Admin
  */
 @WebServlet(name = "Patient", urlPatterns = {"/Patient"})
-public class Patient extends BaseServlet {
+public class Patient extends AuthServlet {
  
     @Override
     protected void processPostRequest(HttpServletRequest request, HttpServletResponse response)

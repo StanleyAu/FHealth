@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 /**
  *
@@ -20,6 +21,10 @@ public class RegisterServlet extends BaseServlet {
     @Override
     public void processGetRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, java.io.IOException {
+        String getRolesQuery = 
+                "SELECT id, role FROM role";
+        ArrayList roles = query(getRolesQuery);
+        request.setAttribute("roles", roles);
         RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/register.jsp");
         if (dispatcher != null) {
             dispatcher.forward(request, response);
@@ -39,7 +44,18 @@ public class RegisterServlet extends BaseServlet {
             reg.setSin(request.getParameter("sin"));
             reg.setAddress(request.getParameter("address"));
             reg.setPhone(request.getParameter("phone"));
+            String[] roles = request.getParameterValues("role");
+            for (int i=0; i<roles.length; i++) {
+                if (roles[i] != null) {
+                    String[] idname;
+                    idname = roles[i].split("\\.");
+                    int role_id = Integer.parseInt(idname[0]);
+                    String role = idname[1];
+                    reg.setRole(role, role_id);
+                }
+            }
 
+            // TODO: MUST VALIDATE INPUT (LENGTH)
             UserBean user = UserDAO.register(reg);
 
             if (user.isValid()) {

@@ -6,6 +6,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Collection;
+import java.util.Set;
 import java.sql.PreparedStatement;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
@@ -86,12 +88,21 @@ public class UserDAO {
         String salt = Cipher.generateSalt();
         String password = Cipher.generateSHA(bean.getPassword() + salt);
 
-        String getCredentialId =
+        String crIdQuery =
                 "SELECT id FROM credential WHERE user= ?";
 
-        String setRoleId =
+        String credRoleQuery =
                 "INSERT INTO credential_role "
                 + "VALUES (?, ?)";
+
+        String roleQuery =
+                "INSERT INTO %s (first_name, last_name, credential_id)"
+                + "VALUES (?, ?, ?)";
+
+        String patientQuery =
+                "INSERT INTO patient (first_name, last_name, OHIP, SIN, "
+                + "address, phone, credential_id)"
+                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement credstmt = DatabaseFactory.getInstance().getStatement(addUserQuery);
@@ -103,21 +114,56 @@ public class UserDAO {
             int result = DatabaseFactory.getInstance().update(credstmt);
             System.out.println("Result: " + result);
 
-            credstmt = DatabaseFactory.getInstance().getStatement(getCredentialId);
+            credstmt = DatabaseFactory.getInstance().getStatement(crIdQuery);
             credstmt.setString(1, username);
 
             System.out.println(credstmt.toString());
             HashMap rs = (HashMap) DatabaseFactory.getInstance().query(credstmt).get(0);
             System.out.println("Result: " + rs);
             int uid = (Integer) rs.get("id");
-            int roleId = 1; //DEBUG: STAN
 
-            credstmt = DatabaseFactory.getInstance().getStatement(setRoleId);
-            credstmt.setInt(1, uid);
-            credstmt.setInt(2, roleId);
-            System.out.println(credstmt.toString());
-            result = DatabaseFactory.getInstance().update(credstmt);
-            System.out.println("Result: " + result);
+            Collection<Integer> roleIds = bean.getRoleIDs();
+            Iterator<Integer> roleIdIter = roleIds.iterator();
+            while (roleIdIter.hasNext()) {
+                credstmt = DatabaseFactory.getInstance().getStatement(credRoleQuery);
+                credstmt.setInt(1, uid);
+                credstmt.setInt(2, roleIdIter.next());
+                System.out.println(credstmt.toString());
+                credstmt.addBatch();
+            }
+            result = DatabaseFactory.getInstance().update(credstmt, true);
+            System.out.println("Add user roles: " + result);
+
+            if (bean.hasRole("patient")) {
+                credstmt = DatabaseFactory.getInstance().getStatement(patientQuery);
+                credstmt.setString(1, bean.getFirstName());
+                credstmt.setString(2, bean.getLastName());
+                credstmt.setString(3, bean.getOhip());
+                credstmt.setString(4, bean.getSin());
+                credstmt.setString(5, bean.getAddress());
+                credstmt.setString(6, bean.getPhone());
+                credstmt.setInt(7, uid);
+                result = DatabaseFactory.getInstance().update(credstmt);
+                System.out.println("Add Patient: " + result);
+            }
+            if (bean.hasRole("doctor")) {
+                credstmt = DatabaseFactory.getInstance().getStatement(
+                        String.format(roleQuery, "doctor"));
+                credstmt.setString(1, bean.getFirstName());
+                credstmt.setString(2, bean.getLastName());
+                credstmt.setInt(3, uid);
+                result = DatabaseFactory.getInstance().update(credstmt);
+                System.out.println("Add Doctor: " + result);
+            }
+            if (bean.hasRole("staff")) {
+                credstmt = DatabaseFactory.getInstance().getStatement(
+                        String.format(roleQuery, "doctor"));
+                credstmt.setString(1, bean.getFirstName());
+                credstmt.setString(2, bean.getLastName());
+                credstmt.setInt(3, uid);
+                result = DatabaseFactory.getInstance().update(credstmt);
+                System.out.println("Add Staff: " + result);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

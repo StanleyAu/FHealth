@@ -22,8 +22,6 @@ import javax.servlet.http.HttpSession;
  */
 public class BaseServlet extends HttpServlet {
 
-    UserBean currentUser;
-
     public ArrayList query(String searchQuery) {
         return DatabaseFactory.getInstance().query(searchQuery);
     }
@@ -78,35 +76,15 @@ public class BaseServlet extends HttpServlet {
         return doc_list;
     }
 
-    // Can extend to check for specific roles
-    protected boolean isAuthValid(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        currentUser = this.getUser(request);
-        Boolean isLoginPage = request.getRequestURI().endsWith("/login");
-        if ((currentUser == null) && !isLoginPage) {
-            response.sendRedirect(
-                    response.encodeRedirectURL(
-                    "/FHealth/login?redir="
-                    + request.getRequestURI()
-                    + "?" + request.getQueryString()));
-            return false;
-        }
-        return true;
-    }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (this.isAuthValid(request, response)) {
-            processGetRequest(request, response);
-        }
+        processGetRequest(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (this.isAuthValid(request, response)) {
-            processPostRequest(request, response);
-        }
+        processPostRequest(request, response);
     }
 }
