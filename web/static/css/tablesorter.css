@@ -1,8 +1,9 @@
 /* tables */
 table.tablesorter {
 	background-color: #CDCDCD;
-	width: 600px;
+	width: 1000px;
 }
+
 table.tablesorter thead tr th, table.tablesorter tfoot tr th {
 	background-color: #e6EEEE;
 	border: 1px solid #FFF;

@@ -79,6 +79,10 @@
         <servlet-name>DoctorList</servlet-name>
         <url-pattern>/listdoctor</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Doctor_Diagnosis</servlet-name>
+        <url-pattern>/doctor_diagnosis</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
