@@ -11,9 +11,9 @@ hor     : Stan
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Hospital Management Console - Login</title>
+        <link rel="stylesheet" type="text/css" href="static/css/common.css"/>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
         <script src="static/js/common.js"></script>
-        <link rel="stylesheet" type="text/css" href="static/css/common.css"/>
     </head>
     <body>
         <div class="top-bar-wrapper">
