@@ -34,10 +34,7 @@ public class Appointment extends BaseServlet {
                 + "join doctor doc on a.doctor_id = doc.id "
                 + "left join diagnosis d on a.latest_diagnosis_id = d.id "
                 + "where a.patient_id = %d", p_id);
-
-        System.out.println(sql);
         ArrayList pas_data = query(sql);
-        System.out.println(pas_data);
         request.setAttribute("pas_data", pas_data);
 
         //Disptching request
