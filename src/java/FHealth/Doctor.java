@@ -31,36 +31,39 @@ public class Doctor extends AuthServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
     @Override
     protected void processGetRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String s_param;
-        
+
         Integer d_id = getIntParam(request, "doctor_id", null);
-        
+
         request.setAttribute("doctor_id", d_id);
-            if (d_id == null){
-                PrintWriter out = response.getWriter();
-                out.print("need doctor id");
-                return;
-            }
-            String sql = String.format(
-                    "select p.id, "
-                    + "concat(first_name,' ',last_name) patient "
-                    + "from doctor_patient dp "
-                    + "join patient p on dp.patient_id = p.id "
-                    + "where dp.doctor_id = %d", d_id);
-            ArrayList d_data = query(sql);
-            System.out.println(d_data.toString());
-            if (d_data.isEmpty()) {
-                PrintWriter out = response.getWriter();
-                out.print("invalid doctor id");
-                return;
-            }
-            request.setAttribute("d_data", d_data);
-        
+        if (d_id == null) {
+            PrintWriter out = response.getWriter();
+            out.print("need doctor id");
+            return;
+        }
+        String sql = String.format(
+                "select p.id, "
+                + "p.first_name,"
+                + "p.last_name,"
+                + "MAX(a.dt) last_visit "
+                + "from doctor_patient dp "
+                + "join patient p on dp.patient_id = p.id "
+                + "join appointment a on a.patient_id = p.id "
+                + "where dp.doctor_id = %d "
+                + "group by p.id, p.first_name, p.last_name", d_id);
+        ArrayList d_data = query(sql);
+        System.out.println(d_data.toString());
+        if (d_data.isEmpty()) {
+            PrintWriter out = response.getWriter();
+            out.print("invalid doctor id");
+            return;
+        }
+        request.setAttribute("d_data", d_data);
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/doctor_patientsearch.jsp");
         if (dispatcher != null) {
             dispatcher.forward(request, response);

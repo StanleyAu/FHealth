@@ -4,18 +4,26 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <% List<String> fields = Arrays.asList(
             "Patient ID", "id",
-            "Patient Name", "patient");%>
+            "First Name", "first_name",
+            "Last Name", "last_name",
+            "Last Visit", "last_visit",
+            "More Info", "more_info"
+            );%>
 <html>
     <head>
-        <title>Hospital Management Console</title>
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="static/css/common.css"/>
+        <link rel="stylesheet" type="text/css" href="static/css/tablesorter.css"/>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
         <script type="text/javascript" src="static/js/common.js"></script>
         <script type="text/javascript" src="static/js/jquery.tablesorter.js"></script>
         <script type="text/javascript" src="static/js/tablesorter_filter.js"></script>
         <script type="text/javascript" src="static/js/doctor_patientsearch.js"></script>
         <%= WebUtil.js_var("doctor_id", (Integer) request.getAttribute("doctor_id"))%>
-        <link rel="stylesheet" type="text/css" href="static/css/common.css"/>
-        <link rel="stylesheet" type="text/css" href="static/css/tablesorter.css"/>
+        <%=WebUtil.js_var("menu_items", request.getAttribute("menu_items"))%>
+        <%=WebUtil.js_var("user", request.getAttribute("user"))%>
+        <title>Hospital Management Console</title>
+        
     </head>
     <body>
         <div class="top-bar-wrapper">
@@ -23,7 +31,6 @@
         </div>
         <div class="left-pane-container">
             <div class="left-pane">
-                <div class="menu-item">MENU ITEM</div>
             </div>
         </div>
         <div class="content">
@@ -34,7 +41,6 @@
                             <% for (int i = 0; i < fields.size(); i += 2) {%>
                             <th><%= fields.get(i)%></th>
                             <% }%>
-                            <th>View Appointments</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,7 +53,9 @@
                             <% HashMap pa_data = (HashMap) d_data.get(i);%>
                             <td><%= pa_data.get(fields.get(1))%></td>
                             <td><%= pa_data.get(fields.get(3))%></td>
-                            <td><a href="/FHealth/appointment?patient_id=<%= pa_data.get(fields.get(1))%>">More Info</a></td>
+                            <td><%= pa_data.get(fields.get(5))%></td>
+                            <td><%= pa_data.get(fields.get(7))%></td>
+                            <td><a href="/FHealth/appointment?patient_id=<%= pa_data.get(fields.get(1))%>">view appointments</a></td>
                         </tr>
                         <%}%>
                     </tbody>

@@ -31,7 +31,7 @@ function init_menu(){
   $lp.append(make_menu_header());
   if (window.menu_items){
       $.each(window.menu_items,function(i, role_item){
-          $lp.append(make_menu_role(role_item[0]));
+          $lp.append(make_menu_role(role_item[0][1]));
           $.each(role_item[1], function(i, role_action){
               $lp.append(make_role_action(role_action));
           })

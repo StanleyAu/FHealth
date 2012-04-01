@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" import="javax.servlet.*" %>
+<%@ page language="java" import="java.util.*, Util.WebUtil, javax.servlet.*" %>
 <% List<String> fields = Arrays.asList(
             "Date", "dt",
             "Duration", "duration",
@@ -7,14 +7,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Hospital Management Console</title>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
-  <script src="static/js/common.js"></script>
-  <script src="static/js/financeselect.js"></script>
-  <link rel='stylesheet' type='text/css' href='static/css/common.css'>
-  <link rel='stylesheet' type='text/css' href='static/css/tables.css'>
-  <link rel='stylesheet' type='text/css' href='static/css/jquery-ui-1.8.18.custom.css'>
+    <link rel="stylesheet" type="text/css" href="static/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="static/css/tables.css"/>
+    <link rel='stylesheet' type='text/css' href='static/css/jquery-ui-1.8.18.custom.css'>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Hospital Management Console - Login</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+    <script src="static/js/common.js"></script>
+    <script src="static/js/financelist.js"></script>
+    <script src="static/js/financeselect.js"></script>
+    <%=WebUtil.js_var("menu_items", request.getAttribute("menu_items"))%>
+    <%=WebUtil.js_var("user", request.getAttribute("user"))%>
 </head>
 <body>
   <div class="top-bar-wrapper">
@@ -22,7 +26,6 @@
   </div>
   <div class="left-pane-container">
     <div class="left-pane">
-      <div class="menu-item">MENU ITEM</div>
     </div>
   </div>
   <div class="content">

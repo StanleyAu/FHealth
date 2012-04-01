@@ -1,5 +1,6 @@
 package FHealth;
 
+import Auth.AuthServlet;
 import Util.WebUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author brian
  */
-public class Diagnosis extends BaseServlet {
+public class Diagnosis extends AuthServlet {
 
     @Override
     protected void processPostRequest(HttpServletRequest request, HttpServletResponse response)

@@ -4,10 +4,14 @@ table.tablesorter {
 	width: 1000px;
 }
 
+table.tablesorter#patients {
+	width: 800px;
+}
+
 table.tablesorter thead tr th, table.tablesorter tfoot tr th {
 	background-color: #e6EEEE;
 	border: 1px solid #FFF;
-	font-size: 1.2em;
+	font-size: 0.9em;
 	padding: 3px 0;
 }
 table.tablesorter thead tr .header {

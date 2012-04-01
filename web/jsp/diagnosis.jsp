@@ -9,13 +9,16 @@
             "Procedures", "procedures");%>
 <html>
     <head>
-        <title>Hospital Management Console</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="static/css/common.css"/>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
         <script type="text/javascript" src="static/js/common.js"></script>
         <script type="text/javascript" src="static/js/diagnosis.js"></script>
+        <%=WebUtil.js_var("menu_items", request.getAttribute("menu_items"))%>
+        <%=WebUtil.js_var("user", request.getAttribute("user"))%>
         <%= (Boolean)request.getAttribute("new_record")?
             "":WebUtil.js_var("p_data", (HashMap)request.getAttribute("p_data")) %>
-        <link rel="stylesheet" type="text/css" href="static/css/common.css"/>
+        <title>Hospital Management Console</title>
     </head>
     <body>
         <div class="top-bar-wrapper">
@@ -23,7 +26,6 @@
         </div>
         <div class="left-pane-container">
             <div class="left-pane">
-                <div class="menu-item">MENU ITEM</div>
             </div>
         </div>
         <div class="content">
@@ -37,8 +39,8 @@
                 for (int i = 0; i < fields.size(); i += 2) {%>
             <label class="textarea" for="<%= fields.get(i + 1)%>">
                 <%= fields.get(i)%></label>
-            <textarea name="<%= fields.get(i + 1)%>">
-                   <%= (new_record)? "":p_data.get(fields.get(i + 1))%></textarea><br/>
+            <textarea name="<%= fields.get(i + 1)%>"><%= (new_record)?
+                "":p_data.get(fields.get(i + 1))%></textarea><br/>
             <% }%>
             <input type="hidden" name="appointment_id" 
                    value="<%=request.getAttribute("appointment_id")%>"

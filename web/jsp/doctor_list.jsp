@@ -12,6 +12,8 @@
         <script type="text/javascript" src="static/js/jquery.tablesorter.js"></script>
         <script type="text/javascript" src="static/js/tablesorter_filter.js"></script>
         <script type="text/javascript" src="static/js/doctor_patientsearch.js"></script>
+        <%=WebUtil.js_var("menu_items", request.getAttribute("menu_items"))%>
+        <%=WebUtil.js_var("user", request.getAttribute("user"))%>
         <%= WebUtil.js_var("doctor_id", (Integer) request.getAttribute("doctor_id"))%>
         <link rel="stylesheet" type="text/css" href="static/css/common.css"/>
         <link rel="stylesheet" type="text/css" href="static/css/tablesorter.css"/>
@@ -22,7 +24,6 @@
         </div>
         <div class="left-pane-container">
             <div class="left-pane">
-                <div class="menu-item">MENU ITEM</div>
             </div>
         </div>
         <div class="content">

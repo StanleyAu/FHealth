@@ -21,6 +21,7 @@
         </div>
         <div class="content">
             <div class="data-container">
+                <div class="welcome-text">Welcome</div>
             </div>
             <div class="buttons-container">
             </div>

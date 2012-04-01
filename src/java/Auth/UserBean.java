@@ -9,23 +9,23 @@ import Util.WebUtil;
 public class UserBean {
     public static ArrayList role_actions = WebUtil.gson.fromJson(
             "["
-            + "['admin', ["
-                + "['register user', 'register']"
+            + "[['admin', 'Admin'], ["
+                + "['Register User', 'register']"
             + "]],"
-            + "['finance',["
-                + "['doctor summary', 'finance']"
+            + "[['finance', 'Finance'],["
+                + "['Doctor Summary', 'finance']"
             + "]],"
-            + "['doctor',["
-                + "['search patient', 'doctor?doctor_id=$(did)'],"
-                + "['search appointment', 'doctor?doctor_id=$(did)']"
+            + "[['doctor', 'Doctor'],["
+                + "['Search Patient', 'doctor?doctor_id=$(did)'],"
+                + "['Search Appointment', 'doctor_diagnosis?doctor_id=$(did)']"
             + "]],"
-            + "['staff',["
-                + "['update patient', ''],"
-                + "['book appointment', '']"
+            + "[['staff', 'Staff'],["
+                + "['Update Patient', ''],"
+                + "['Book Appointment', '']"
             + "]],"
-            + "['patient',["
-                + "['update profile','Patient?patient_id=$(pid)'],"
-                + "['view appointment', '']"
+            + "[['patient', 'Patient'],["
+                + "['Update Profile','Patient?patient_id=$(pid)'],"
+                + "['View Appointment', '']"
             + "]]"
             + "]"
             , ArrayList.class);
@@ -106,13 +106,15 @@ public class UserBean {
     public ArrayList menuItems(){
         ArrayList menuItems = new ArrayList();
         for (int i = 0; i < role_actions.size(); i++){
-            String role = (String)
-                    (((ArrayList)role_actions.get(i)).get(0));
+            String role = (String)((ArrayList)
+                    (((ArrayList)role_actions.get(i)).get(0))).get(0);
             if (hasRole(role)){
                 menuItems.add(
                         ((ArrayList)role_actions.get(i)).clone());
             }
         }
+        System.err.println(role_actions);
+        System.err.println(menuItems);
         return menuItems;
     }
     

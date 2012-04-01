@@ -4,8 +4,7 @@
  */
 package FHealth;
 
-import FHealth.DatabaseFactory;
-import java.sql.*;
+import Auth.AuthServlet;
 import java.util.*;
 import java.io.*;
 import javax.servlet.*;
@@ -15,7 +14,7 @@ import javax.servlet.http.*;
  *
  * @author Yeung
  */
-public class Appointment extends BaseServlet {
+public class Appointment extends AuthServlet {
 
     String page = "jsp/patient_appointment.jsp";
 

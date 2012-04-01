@@ -6,7 +6,7 @@ body {
   padding: 0;
   margin: 0;
   vertical-align: top;
-  min-width:1000px;
+  min-width:1300px;
 }
 
 .top-bar {
@@ -86,6 +86,10 @@ body {
 .content .response-text {
   font-size: 1.1em;
   text-align: right;
+}
+
+.content .welcome-text{
+  font-size: 4em;
 }
 
 .hide {

@@ -97,7 +97,7 @@ public class Patient extends AuthServlet {
         Boolean editable = getBoolParam(request, "editable", Boolean.FALSE);
         
         request.setAttribute("new_record", new_record);
-        request.setAttribute("editable", editable);
+        request.setAttribute("editable", Boolean.TRUE);
         request.setAttribute("patient_id", p_id);
         if (!new_record){
             if (p_id == null){
