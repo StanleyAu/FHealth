@@ -5,7 +5,7 @@
 package Util;
 
 import com.google.gson.Gson;
-
+import java.util.*;
 /**
  *
  * @author Admin
@@ -13,7 +13,7 @@ import com.google.gson.Gson;
 public class WebUtil {
     
     public static Gson gson = new Gson();
-    
+
     public static String js_var(String var_name, Object obj) {
         
         String json = gson.toJson(obj, obj.getClass());

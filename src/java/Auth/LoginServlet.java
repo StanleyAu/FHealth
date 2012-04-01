@@ -43,7 +43,7 @@ public class LoginServlet extends BaseServlet {
                 if (!redir.isEmpty()) {
                     response.sendRedirect(redir);
                 }
-                response.sendRedirect("/FHealth/jsp/loginsuccess.jsp"); //logged-in page      		
+                response.sendRedirect("/FHealth/Home"); //logged-in page      		
             } else {
                 response.sendRedirect("/FHealth/jsp/loginfail.jsp"); //error page 
             }

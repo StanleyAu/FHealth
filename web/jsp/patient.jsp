@@ -31,7 +31,10 @@
         </div>
         <div class="left-pane-container">
             <div class="left-pane">
-                <div class="menu-item">MENU ITEM</div>
+                <% Object menu_items[] = (Object[])request.getAttribute("menu_items");
+                for (int i=0; i<menu_items.length; i++){ %>
+                <div class="menu-item"><%= menu_items[i].toString() %></div>
+                <% } %>
             </div>
         </div>
         <div class="content">

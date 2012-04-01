@@ -1,11 +1,35 @@
 package Auth;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.Collection;
+import Util.WebUtil;
 
 public class UserBean {
-
+    public static ArrayList role_actions = WebUtil.gson.fromJson(
+            "["
+            + "['admin', ["
+                + "['register user', 'register']"
+            + "]],"
+            + "['finance',["
+                + "['doctor summary', 'finance']"
+            + "]],"
+            + "['doctor',["
+                + "['search patient', 'doctor?doctor_id=%d'],"
+                + "['search appointment', 'doctor?doctor_id=%d']"
+            + "]],"
+            + "['staff',["
+                + "['update patient', ''],"
+                + "['book appointment', '']"
+            + "]],"
+            + "['patient',["
+                + "['update profile',''],"
+                + "['view appointment', '']"
+            + "]]"
+            + "]"
+            , ArrayList.class);
+    
     private int uid;
     private String username;
     private String password; // Should clear after login
@@ -78,4 +102,19 @@ public class UserBean {
     public void setValid(boolean newValid) {
         valid = newValid;
     }
+    
+    public ArrayList menuItems(){
+        ArrayList menuItems = new ArrayList();
+        for (int i = 0; i < role_actions.size(); i++){
+            String role = (String)
+                    (((ArrayList)role_actions.get(i)).get(0));
+            if (hasRole(role)){
+                menuItems.add(
+                        ((ArrayList)role_actions.get(i)).clone());
+            }
+        }
+        return menuItems;
+    }
+    
+    
 }

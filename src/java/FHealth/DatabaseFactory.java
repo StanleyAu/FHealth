@@ -12,7 +12,7 @@ public class DatabaseFactory {
 
     private Connection _conn = null;
     private static DatabaseFactory dbf;
-
+    
     public DatabaseFactory() {
         try {
             Class.forName("com.mysql.jdbc.Driver");

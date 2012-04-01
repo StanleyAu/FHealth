@@ -28,7 +28,8 @@ public class UserDAO {
                 + "WHERE user= ?";
 
         String roleQuery =
-                "SELECT id, user, staff, doctor, patient "
+                "SELECT id, user, admin, finance, legal,"
+                + "staff, doctor, patient "
                 + "FROM v_user_role "
                 + "WHERE user= ?";
 
@@ -69,6 +70,19 @@ public class UserDAO {
                     if (patient != null) {
                         bean.setRole("patient", patient);
                     }
+                    Integer admin = ((Long)row.get("admin")).intValue();
+                    if (admin != 0) {
+                        bean.setRole("admin", admin);
+                    }
+                    Integer finance = ((Long)row.get("finance")).intValue();
+                    if (finance != 0) {
+                        bean.setRole("finance", finance);
+                    }
+                    Integer legal = ((Long)row.get("legal")).intValue();
+                    if (legal != 0) {
+                        bean.setRole("legal", legal);
+                    }
+                    
                     bean.setUID(uid);
                     bean.setValid(true);
                 }

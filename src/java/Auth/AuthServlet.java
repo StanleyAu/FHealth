@@ -4,6 +4,7 @@
  */
 package Auth;
 
+import java.util.*;
 import FHealth.BaseServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -36,11 +37,17 @@ public class AuthServlet extends BaseServlet {
         }
         return true;
     }
-
+    
+    protected ArrayList authMenuItems(){
+        ArrayList menu_items = currentUser.menuItems();
+        return menu_items;
+    }
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if (this.isAuthValid(request, response)) {
+            request.setAttribute("menu_items", authMenuItems());
             processGetRequest(request, response);
         }
     }
