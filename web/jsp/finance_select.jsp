@@ -29,7 +29,6 @@
     </div>
   </div>
   <div class="content">
-    <h1 class="titleblock">Doctor Name</h1>
     <div>
         <form action="FHealth/finance" method="POST">
             <input type="text" id="beforeDate" value="">

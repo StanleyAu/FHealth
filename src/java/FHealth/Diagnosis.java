@@ -30,15 +30,32 @@ public class Diagnosis extends AuthServlet {
             return;
         }
         HashMap p_data= WebUtil.gson.fromJson(p_json, HashMap.class);
+        String p_input = p_data.get("prescriptions").toString();
+        String sql = "select * from prescription";
+        ArrayList p_list = query(sql);
+        HashMap drugs = new HashMap();
+        for (int j = 0; j < p_list.size(); j++) 
+        {
+            HashMap drug = (HashMap) p_list.get(j);
+            drugs.put(drug.get("name"), (Integer)drug.get("id"));
+        }
+        String[] psplit = p_input.split(",");
+        StringBuilder sb = new StringBuilder();
+        for (String pres : psplit) {
+            sb.append(Integer.toString((Integer)drugs.get(pres)));
+            sb.append(",");
+        }
+        sb.deleteCharAt(sb.length()-1);
+        
         if (op.equals("save")){
-            String sql = String.format("insert into diagnosis "
+              sql = String.format("insert into diagnosis "
                     + "(appointment_id, diagnosis, perscriptions, comments, "
                     + "procedures) "
                     + "values(%s,'%s','%s','%s', '%s')",
                     (String)p_data.get("appointment_id"),
                     (String)p_data.get("diagnosis"),
-                    (String)p_data.get("comments"),
-                    (String)p_data.get("procedures"));
+                    sb.toString(),
+                    (String)p_data.get("comments"));
             int ret = update(sql);
             PrintWriter out = response.getWriter();
             out.print((ret==1)?"save success":"invalid data");
@@ -77,6 +94,26 @@ public class Diagnosis extends AuthServlet {
                 PrintWriter out = response.getWriter();
                 out.print("No Diagnosis for specified data");
                 return;
+            }
+            sql = "select * from prescription";
+            ArrayList p_list = query(sql);
+            HashMap drugs = new HashMap();
+            for (int j = 0; j < p_list.size(); j++) 
+            {
+                HashMap drug = (HashMap) p_list.get(j);
+                drugs.put((Integer)drug.get("id"), drug.get("name"));
+            }
+            for (int i = 0; i < p_data.size(); i++){
+                HashMap hm = (HashMap)p_data.get(i);
+                String prescriptions = (String)hm.get("prescriptions");
+                String[] pres = prescriptions.split(",");
+                StringBuilder sb = new StringBuilder();
+                for (int k = 0; k < pres.length; k++) {
+                    if (drugs.get(Integer.parseInt(pres[k])) != null)
+                        sb.append(drugs.get(Integer.parseInt(pres[k]))+",");
+                }
+                sb.deleteCharAt(sb.length()-1);
+                ((HashMap)p_data.get(i)).put("prescriptions", sb.toString());
             }
             request.setAttribute("p_data", p_data.get(p_data.size()-1));
         }

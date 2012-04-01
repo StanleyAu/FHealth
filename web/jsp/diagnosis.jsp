@@ -2,11 +2,22 @@
 <%@page language="java" import="java.util.*, Util.WebUtil" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<% List<String> fields = Arrays.asList(
+<%
+  List<String> fields = null;
+  if ((Boolean)request.getAttribute("editable") == true) {
+        fields = Arrays.asList(
             "Diagnosis", "diagnosis",
             "Perscriptions", "perscriptions",
             "Comments", "comments",
-            "Procedures", "procedures");%>
+            "Procedures", "procedures");
+  }
+  else {
+        fields = Arrays.asList(
+            "Diagnosis", "diagnosis",
+            "Perscriptions", "perscriptions",
+            "Procedures", "procedures");
+  }
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

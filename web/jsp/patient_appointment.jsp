@@ -26,7 +26,6 @@
             </div>
         </div>
         <div class="content">
-            <h1 class="titleblock">Patient Name</h1>
             <table>
                 <thead><tr>
                         <% for (int i = 0; i < fields.size(); i += 2) {%>
@@ -48,7 +47,7 @@
                         %>
                         <td><%= pa_data.get(fields.get(j + 1))%></td>
                         <% }%>
-                        <td><a href=<%="/FHealth/diagnosis?appointment_id="+pa_data.get("id")+"&new_record=False&editable=False"%>>More Info</a></td>
+                        <td><a href=<%="/FHealth/diagnosis?appointment_id="+pa_data.get("id")+"&new_record="+pa_data.get("editable")+"&editable="+pa_data.get("editable")%>>More Info</a></td>
                     </tr>
                     <%}%>
                 </tbody>

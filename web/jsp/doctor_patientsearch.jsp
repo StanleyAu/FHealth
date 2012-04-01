@@ -55,7 +55,7 @@
                             <td><%= pa_data.get(fields.get(3))%></td>
                             <td><%= pa_data.get(fields.get(5))%></td>
                             <td><%= pa_data.get(fields.get(7))%></td>
-                            <td><a href="/FHealth/appointment?patient_id=<%= pa_data.get(fields.get(1))%>">view appointments</a></td>
+                            <td><a href=<%="/FHealth/appointment?patient_id="+pa_data.get(fields.get(1))+"&editable=true"%>view appointments</a></td>
                         </tr>
                         <%}%>
                     </tbody>

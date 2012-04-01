@@ -35,6 +35,9 @@ public class Appointment extends AuthServlet {
                 + "where a.patient_id = %d", p_id);
         ArrayList pas_data = query(sql);
         request.setAttribute("pas_data", pas_data);
+        String editable = request.getParameter("editable") == null ? 
+                   "false" : request.getParameter("editable");
+        request.setAttribute("editable", editable);
 
         //Disptching request
         RequestDispatcher dispatcher = request.getRequestDispatcher(page);
