@@ -21,7 +21,7 @@ public class RegisterServlet extends AuthServlet {
     @Override
     public void processGetRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, java.io.IOException {
-        String getRolesQuery = 
+        String getRolesQuery =
                 "SELECT id, role FROM role";
         ArrayList roles = query(getRolesQuery);
         request.setAttribute("roles", roles);
@@ -45,7 +45,7 @@ public class RegisterServlet extends AuthServlet {
             reg.setAddress(request.getParameter("address"));
             reg.setPhone(request.getParameter("phone"));
             String[] roles = request.getParameterValues("role");
-            for (int i=0; i<roles.length; i++) {
+            for (int i = 0; i < roles.length; i++) {
                 if (roles[i] != null) {
                     String[] idname;
                     idname = roles[i].split("\\.");
@@ -61,10 +61,11 @@ public class RegisterServlet extends AuthServlet {
             if (user.isValid()) {
                 HttpSession session = request.getSession(true);
                 session.setAttribute("currentSessionUser", user);
-                response.sendRedirect("/FHealth/jsp/loginsuccess.jsp"); //logged-in page      		
+                response.sendRedirect("/FHealth/jsp/loginsuccess.jsp"); //logged-in page
             } else {
-                response.sendRedirect("/FHealth/jsp/loginfail.jsp"); //error page 
+                response.sendRedirect("/FHealth/jsp/loginfail.jsp"); //error page
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

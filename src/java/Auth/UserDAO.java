@@ -184,6 +184,6 @@ public class UserDAO {
 
         // If user is type-patient, we must insert additional fields!
 
-        return new UserBean();
+        return bean;
     }
 }

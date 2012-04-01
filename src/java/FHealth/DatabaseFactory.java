@@ -38,9 +38,18 @@ public class DatabaseFactory {
 
     public PreparedStatement getStatement(String searchQuery)
             throws SQLException {
-        return getConnection().prepareStatement(searchQuery);
+        return this.getStatement(searchQuery, false);
     }
-    
+
+    public PreparedStatement getStatement(String searchQuery, boolean returnKeys)
+            throws SQLException {
+        if (returnKeys) {
+            return getConnection().prepareStatement(searchQuery, Statement.RETURN_GENERATED_KEYS);
+        } else {
+            return getConnection().prepareStatement(searchQuery);
+        }
+    }
+
     public CallableStatement getCallable(String searchQuery)
             throws SQLException {
         return getConnection().prepareCall(searchQuery);
@@ -86,7 +95,7 @@ public class DatabaseFactory {
             }
         }
     }
-    
+
     public int update(PreparedStatement pms) {
         return this.update(pms, false);
     }
@@ -96,17 +105,37 @@ public class DatabaseFactory {
         try {
             if (batch) {
                 int[] rets = pms.executeBatch();
-                for (int i=0; i < rets.length; i++) {
+                for (int i = 0; i < rets.length; i++) {
                     ret = ret & rets[i];
                 }
-            }
-            else {
+            } else {
                 ret = pms.executeUpdate();
             }
             return ret;
         } catch (SQLException e) {
             e.printStackTrace();
             return -1;
+        } finally {
+            if (pms != null) {
+                try {
+                    pms.close();
+                } catch (Exception e) {
+                }
+                pms = null;
+            }
+        }
+    }
+    
+    public ArrayList getGeneratedKeys(PreparedStatement pms) {
+        // executeUpdate
+        // getGeneratedKeys
+        int ret = 0;
+        try {
+            ret = pms.executeUpdate();
+            return _query(pms.getGeneratedKeys());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
         } finally {
             if (pms != null) {
                 try {

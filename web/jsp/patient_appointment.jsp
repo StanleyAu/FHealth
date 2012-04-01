@@ -42,8 +42,10 @@
                             table_css = (i % 2 != 0) ? "second" : "";
                     %>
                     <tr id='<%= i.toString()%>' class='<%= table_css%>'>
-                        <% HashMap pa_data = (HashMap) pas_data.get(i);
-                for (int j = 0; j < fields.size(); j += 2) {%>
+                        <%
+                            HashMap pa_data = (HashMap) pas_data.get(i);
+                            for (int j = 0; j < fields.size(); j += 2) {
+                        %>
                         <td><%= pa_data.get(fields.get(j + 1))%></td>
                         <% }%>
                         <td><a href=<%="/FHealth/diagnosis?appointment_id="+pa_data.get("id")+"&new_record=False&editable=False"%>>More Info</a></td>

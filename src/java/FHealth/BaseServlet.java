@@ -21,6 +21,10 @@ import javax.servlet.http.HttpSession;
  * @author Stan
  */
 public class BaseServlet extends HttpServlet {
+    
+    public DatabaseFactory db() {
+        return DatabaseFactory.getInstance();
+    }
 
     public ArrayList query(String searchQuery) {
         return DatabaseFactory.getInstance().query(searchQuery);
@@ -37,11 +41,33 @@ public class BaseServlet extends HttpServlet {
         return user; // Should return null if no user in cookie
     }
 
+    protected boolean logout(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.removeAttribute("currentSessionUser");
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     protected Integer getIntParam(HttpServletRequest request, String key,
             Integer default_value) {
         String s_param = request.getParameter(key);
-        Integer value = (s_param == null)
-                ? default_value : Integer.parseInt(s_param);
+        System.out.println("Not broken on getParam: " + s_param);
+        Integer value;
+        if (s_param == null) {
+                if (default_value == null) {
+                    value = null;
+                }
+                else {
+                    value = default_value;
+                }
+            }
+        else {
+            value = Integer.parseInt(s_param);
+        }
+        System.out.println("Not broken on ternary op");
         return value;
     }
 
@@ -74,6 +100,13 @@ public class BaseServlet extends HttpServlet {
                 + " from doctor order by last_name";
         ArrayList doc_list = query(sql);
         return doc_list;
+    }
+    
+    protected ArrayList<ArrayList> getPatientList() {
+        String sql = "SELECT id, concat(first_name,' ',last_name) patient"
+                + " from patient order by last_name";
+        ArrayList p_list = query(sql);
+        return p_list;
     }
 
     @Override
