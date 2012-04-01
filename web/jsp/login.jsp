@@ -1,7 +1,8 @@
 <%-- 
     Document   : login
     Created on : 30-Mar-2012, 2:04:52 AM
-    Author     : Stan
+    Autthat
+hor     : Stan
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

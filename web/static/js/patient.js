@@ -63,4 +63,9 @@ $(document).ready(function(){
     $('div.button#save').click(save_new_record);
     $('div.button#update').click(update_record);
     create_doctor_dropdown();
+    if (!window.editable && !window.new_record){
+        $.each($('input,select'), function(i, e){
+            $(e).attr("disabled", "disabled");
+        });
+    }
 });

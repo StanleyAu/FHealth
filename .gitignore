@@ -1,5 +1,4 @@
 build/*
-nbproject/*.properties
-nbproject/private/*.properties
+nbproject/*
 dist/*
 
