@@ -23,7 +23,7 @@
         <%=WebUtil.js_var("menu_items", request.getAttribute("menu_items"))%>
         <%=WebUtil.js_var("user", request.getAttribute("user"))%>
         <title>Hospital Management Console</title>
-        
+
     </head>
     <body>
         <div class="top-bar-wrapper">
@@ -70,4 +70,4 @@
             <div class="response-text"></div>
         </div>
     </body>
-</html>    
+</html>
