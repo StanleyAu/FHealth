@@ -29,7 +29,7 @@ public class Appointment extends BaseServlet {
                 + "duration,"
                 + "concat(first_name,' ',last_name) doctor,"
                 + "status, diagnosis, prescriptions, "
-                + "comments, procedures "
+                + "comments, procedures, a.id "
                 + "from appointment a "
                 + "join doctor doc on a.doctor_id = doc.id "
                 + "left join diagnosis d on a.latest_diagnosis_id = d.id "
