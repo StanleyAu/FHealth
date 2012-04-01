@@ -31,7 +31,7 @@ public class Diagnosis extends BaseServlet {
         HashMap p_data= WebUtil.gson.fromJson(p_json, HashMap.class);
         if (op.equals("save")){
             String sql = String.format("insert into diagnosis "
-                    + "(appointment_id, diagnosis, comments, "
+                    + "(appointment_id, diagnosis, perscriptions, comments, "
                     + "procedures) "
                     + "values(%s,'%s','%s','%s', '%s')",
                     (String)p_data.get("appointment_id"),

@@ -43,6 +43,10 @@
         <servlet-name>Doctor</servlet-name>
         <servlet-class>FHealth.Doctor</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DoctorList</servlet-name>
+        <servlet-class>FHealth.DoctorList</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>testServlet</servlet-name>
         <url-pattern>/testServlet</url-pattern>
@@ -78,6 +82,10 @@
     <servlet-mapping>
         <servlet-name>Doctor</servlet-name>
         <url-pattern>/Doctor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DoctorList</servlet-name>
+        <url-pattern>/listdoctor</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

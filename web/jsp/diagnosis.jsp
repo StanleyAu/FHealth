@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <% List<String> fields = Arrays.asList(
             "Diagnosis", "diagnosis",
+            "Perscriptions", "perscriptions",
             "Comments", "comments",
             "Procedures", "procedures");%>
 <html>
