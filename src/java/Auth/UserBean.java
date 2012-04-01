@@ -11,6 +11,10 @@ public class UserBean {
     private HashMap<String, Integer> roles;
     public boolean valid;
     
+    public UserBean() {
+        roles = new HashMap();
+    }
+    
     public int getUID() {
         return uid;
     }

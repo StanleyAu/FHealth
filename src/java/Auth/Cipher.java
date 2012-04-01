@@ -15,6 +15,7 @@ import java.security.SecureRandom;
  * @author Stan
  */
 public class Cipher {
+
     public static String generateSalt() {
         SecureRandom random = new SecureRandom();
         // Generate 20 char salt (100 bits / 5 <-- 2^5 = 32
@@ -22,14 +23,22 @@ public class Cipher {
     }
 
     // This belongs somewhere else
-    public static String generateSHA(String text)
-            throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        MessageDigest md = MessageDigest.getInstance("SHA1");
+    public static String generateSHA(String text) {
+        MessageDigest md = null;
         byte[] digest = new byte[64];
-        md.update(text.getBytes("utf-16le"), 0, text.length());
-        digest = md.digest();
+        BigInteger bi = null;
 
-        BigInteger bi = new BigInteger(1, digest);
+        try {
+            md = MessageDigest.getInstance("SHA1");
+            md.update(text.getBytes("utf-16le"), 0, text.length());
+            digest = md.digest();
+
+            bi = new BigInteger(1, digest);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
         return String.format("%0" + (digest.length << 1) + "X", bi);
     }
 }

@@ -11,8 +11,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Hospital Management Console - Login</title>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-        <script src="../static/js/common.js"></script>
-        <link rel="stylesheet" type="text/css" href="../static/css/common.css"/>
+        <script src="static/js/common.js"></script>
+        <link rel="stylesheet" type="text/css" href="static/css/common.css"/>
     </head>
     <body>
         <div class="top-bar-wrapper">
@@ -24,14 +24,16 @@
             </div>
         </div>
         <div class="content">
-            <form action="../login" method="POST">
+            <form action="login" method="POST">
                 <label for="username">Username</label>
                 <input type="text" name="username" value=""><br/>
                 <label for="password">Password</label>
-                <input type="text" name="password" value=""><br/>
+                <input type="password" name="password" value=""><br/>
                 <div class="buttons-container">
                     <input type="submit" name="submit" value="Login" />
                 </div>
+                <input type="hidden" name="redir"
+                       value="<%= ((String) request.getAttribute("redir"))%>" />
             </form>
         </div>
     </body>

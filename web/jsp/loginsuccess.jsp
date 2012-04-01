@@ -29,7 +29,7 @@
         </div>
         <div class="content">
             <% UserBean currentUser = (UserBean) (session.getAttribute("currentSessionUser"));%>	
-            Welcome <%= currentUser.getFirstName() + " " + currentUser.getLastName()%>
+            Welcome <%= currentUser.getUsername()%>
         </div>
     </body>
 </html>

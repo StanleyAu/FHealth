@@ -40,6 +40,11 @@ public class DatabaseFactory {
             throws SQLException {
         return getConnection().prepareStatement(searchQuery);
     }
+    
+    public CallableStatement getCallable(String searchQuery)
+            throws SQLException {
+        return getConnection().prepareCall(searchQuery);
+    }
 
     public ArrayList query(PreparedStatement pms) {
         ResultSet rs = null;
@@ -60,16 +65,45 @@ public class DatabaseFactory {
             }
         }
     }
-    public int update(String query){
-        try{
-            Statement stm = _conn.createStatement();
-            int ret =  stm.executeUpdate(query);
+
+    public int update(String query) {
+        Statement stm = null;
+        try {
+            stm = _conn.createStatement();
+            int ret = stm.executeUpdate(query);
             return ret;
         } catch (SQLException e) {
             e.printStackTrace();
             return -1;
+        } finally {
+            if (stm != null) {
+                try {
+                    stm.close();
+                } catch (Exception e) {
+                }
+                stm = null;
+            }
         }
     }
+    
+    public int update(PreparedStatement pms) {
+        try {
+            int ret = pms.executeUpdate();
+            return ret;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        } finally {
+            if (pms != null) {
+                try {
+                    pms.close();
+                } catch (Exception e) {
+                }
+                pms = null;
+            }
+        }
+    }
+
     public ArrayList query(String searchQuery) {
         PreparedStatement pms = null;
         ResultSet rs = null;
@@ -92,7 +126,8 @@ public class DatabaseFactory {
         }
     }
 
-    protected ArrayList _query(ResultSet rs) {
+    protected ArrayList _query(ResultSet rs)
+            throws SQLException {
         try {
             ResultSetMetaData md = rs.getMetaData();
             int columns = md.getColumnCount();
@@ -105,9 +140,6 @@ public class DatabaseFactory {
                 list.add(row);
             }
             return list;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
         } finally {
             if (rs != null) {
                 try {

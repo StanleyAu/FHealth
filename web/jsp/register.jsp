@@ -9,10 +9,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Hospital Management Console - Register</title>
+        <title>Hospital Management Console - Login</title>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-        <script src="../static/js/common.js"></script>
-        <link rel="stylesheet" type="text/css" href="../static/css/common.css"/>
+        <script src="static/js/common.js"></script>
+        <link rel="stylesheet" type="text/css" href="static/css/common.css"/>
     </head>
     <body>
         <div class="top-bar-wrapper">
@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="content">
-            <form action="../login" method="POST">
+            <form action="register" method="POST">
                 <label for="firstname">First Name</label>
                 <input type="text" name="firstname" value=""><br />
                 <label for="lastname">Last Name</label>

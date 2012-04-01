@@ -22,16 +22,18 @@ import javax.servlet.http.HttpSession;
  */
 public class BaseServlet extends HttpServlet {
 
+    UserBean currentUser;
+
     public ArrayList query(String searchQuery) {
         return DatabaseFactory.getInstance().query(searchQuery);
     }
 
-    
     public int update(String updateQuery) {
         return DatabaseFactory.getInstance().update(updateQuery);
     }
     // Will return null if user is not logged in
-    public UserBean getUser(HttpServletRequest request) {
+
+    protected UserBean getUser(HttpServletRequest request) {
         HttpSession session = request.getSession(true);
         UserBean user = (UserBean) (session.getAttribute("currentSessionUser"));
         return user; // Should return null if no user in cookie
@@ -53,6 +55,14 @@ public class BaseServlet extends HttpServlet {
         return value;
     }
 
+    protected String getStringParam(HttpServletRequest request, String key,
+            String default_value) {
+        String s_param = request.getParameter(key);
+        String value = (s_param == null)
+                ? default_value : s_param;
+        return value;
+    }
+
     protected void processGetRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     }
@@ -68,15 +78,35 @@ public class BaseServlet extends HttpServlet {
         return doc_list;
     }
 
+    // Can extend to check for specific roles
+    protected boolean isAuthValid(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        currentUser = this.getUser(request);
+        Boolean isLoginPage = request.getRequestURI().endsWith("/login");
+        if ((currentUser == null) && !isLoginPage) {
+            response.sendRedirect(
+                    response.encodeRedirectURL(
+                    "/FHealth/login?redir="
+                    + request.getRequestURI()
+                    + "?" + request.getQueryString()));
+            return false;
+        }
+        return true;
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processGetRequest(request, response);
+        if (this.isAuthValid(request, response)) {
+            processGetRequest(request, response);
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processPostRequest(request, response);
+        if (this.isAuthValid(request, response)) {
+            processPostRequest(request, response);
+        }
     }
 }
