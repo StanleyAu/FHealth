@@ -45,16 +45,17 @@ public class RegisterServlet extends AuthServlet {
             reg.setAddress(request.getParameter("address"));
             reg.setPhone(request.getParameter("phone"));
             String[] roles = request.getParameterValues("role");
+            
             for (int i = 0; i < roles.length; i++) {
                 if (roles[i] != null) {
                     String[] idname;
-                    idname = roles[i].split("\\.");
+                    idname = roles[i].split("[.]");
                     int role_id = Integer.parseInt(idname[0]);
                     String role = idname[1];
                     reg.setRole(role, role_id);
                 }
             }
-
+            System.err.println(reg);
             // TODO: MUST VALIDATE INPUT (LENGTH)
             UserBean user = UserDAO.register(reg);
 

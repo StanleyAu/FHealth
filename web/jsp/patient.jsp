@@ -43,10 +43,9 @@
                     p_data = (HashMap) request.getAttribute("p_data");
                 }
                 for (int i = 0; i < fields.size(); i += 2) {%>
-            <label for="<%= fields.get(i + 1)%>">
-                <%= fields.get(i)%></label>
+            <label for="<%= fields.get(i + 1)%>"><%= fields.get(i)%></label>
             <input name="<%= fields.get(i + 1)%>"
-                   value="<%= (new_record)? "":p_data.get(fields.get(i + 1))%>"><br/>
+                   value="<%= (new_record)? "":p_data.get(fields.get(i + 1))%>"/><br/>
             <% }%>
             </div>
             <div class="buttons-container">

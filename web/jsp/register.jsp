@@ -16,6 +16,7 @@
         <title>Hospital Management Console - Login</title>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
         <script src="static/js/common.js"></script>
+        <script src="static/js/register.js"></script>
         <%=WebUtil.js_var("menu_items", request.getAttribute("menu_items"))%>
         <%=WebUtil.js_var("user", request.getAttribute("user"))%>
         <link rel="stylesheet" type="text/css" href="static/css/common.css"/>

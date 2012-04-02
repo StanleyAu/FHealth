@@ -167,7 +167,7 @@ public class UserDAO {
             }
             if (bean.hasRole("staff")) {
                 credstmt = DatabaseFactory.getInstance().getStatement(
-                        String.format(roleQuery, "doctor"));
+                        String.format(roleQuery, "staff"));
                 credstmt.setString(1, bean.getFirstName());
                 credstmt.setString(2, bean.getLastName());
                 credstmt.setInt(3, uid);

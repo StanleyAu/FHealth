@@ -14,6 +14,7 @@ function create_doctor_dropdown(){
     }
     $('input[name|="default_doctor_id"]').replaceWith($dd);
 }
+
 function get_p_data(){
     var p_data = {};
     
