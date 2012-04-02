@@ -23,6 +23,7 @@ function init_menu(){
               $lp.append(make_role_action(role_action));
           })
       })
+      $lp.append(make_logout());
   }
 }
 
@@ -73,6 +74,12 @@ function make_role_action(action){
   var role_action = "<div class='role-item'><a href='"
       +replace_var(action[1])+"'>"+action[0]+"</a></div>";
   return role_action;  
+}
+
+function make_logout(){
+  var logout = "<div class='log-out'>"
+        +"<a href='logout'>Log Out</a></div>"
+  return logout
 }
 
 $(document).ready(function(){

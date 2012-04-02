@@ -44,8 +44,6 @@ public class AuthServlet extends BaseServlet {
             HttpServletResponse response, HashSet<String> allowed)
             throws ServletException, IOException {
         HashSet<String> allows = new HashSet<String> (allowed);
-        System.out.println(allowed.toString());
-        System.out.println(currentUser.getRoles().toString());
         allows.retainAll(currentUser.getRoles());
         if (allows.size() == 0) {
             response.sendRedirect(
