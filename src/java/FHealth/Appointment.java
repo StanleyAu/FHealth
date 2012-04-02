@@ -17,7 +17,13 @@ import javax.servlet.http.*;
 public class Appointment extends AuthServlet {
 
     String page = "jsp/patient_appointment.jsp";
-
+    @Override
+    protected HashSet getAllow(){
+        HashSet<String> allow = new HashSet<String>();
+        allow.add("patient");
+        allow.add("doctor");
+        return allow;
+    }
     @Override
     public void processGetRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

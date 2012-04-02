@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import Auth.*;
 import java.util.HashMap;
+import java.util.HashSet;
 
 /**
  *
@@ -22,7 +23,13 @@ import java.util.HashMap;
  */
 @WebServlet(name = "Doctor_Diagnosis", urlPatterns = {"/Doctor_Diagnosis"})
 public class Doctor_Diagnosis extends AuthServlet {
-
+    @Override
+    protected HashSet getAllow(){
+        HashSet<String> allow = new HashSet<String>();
+        allow.add("doctor");
+        allow.add("staff");
+        return allow;
+    }
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and

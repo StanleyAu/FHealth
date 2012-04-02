@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,7 +23,18 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "Finance", urlPatterns = {"/finance"})
 public class Finance extends AuthServlet {
-
+    @Override
+    protected HashSet getAllow(){
+        HashSet<String> allow = new HashSet<String>();
+        allow.add("finance");
+        return allow;
+    }
+    @Override
+    protected HashSet postAllow(){
+        HashSet<String> allow = new HashSet<String>();
+        allow.add("finance");
+        return allow;
+    }
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -33,6 +45,7 @@ public class Finance extends AuthServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    @Override
     protected void processGetRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if (request.getParameter("id") == null) {

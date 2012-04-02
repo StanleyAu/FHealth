@@ -4,13 +4,20 @@ import Auth.AuthServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class DoctorList extends AuthServlet {
-
+    @Override
+    protected HashSet getAllow(){
+        HashSet<String> allow = new HashSet<String>();
+        allow.add("staff");
+        return allow;
+    }
+    
  @Override
     protected void processGetRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

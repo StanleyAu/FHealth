@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +17,21 @@ import javax.servlet.http.HttpServletResponse;
  * @author brian
  */
 public class Diagnosis extends AuthServlet {
-
+    @Override
+    protected HashSet getAllow(){
+        HashSet<String> allow = new HashSet<String>();
+        allow.add("doctor");
+        allow.add("staff");
+        allow.add("finance");
+        allow.add("patient");
+        return allow;
+    }
+    @Override
+    protected HashSet postAllow(){
+        HashSet<String> allow = new HashSet<String>();
+        allow.add("doctor");
+        return allow;
+    }
     @Override
     protected void processPostRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

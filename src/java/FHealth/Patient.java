@@ -23,7 +23,20 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "Patient", urlPatterns = {"/Patient"})
 public class Patient extends AuthServlet {
- 
+    @Override
+    protected HashSet getAllow(){
+        HashSet<String> allow = new HashSet<String>();
+        allow.add("patient");
+        allow.add("staff");
+        return allow;
+    }
+    @Override
+    protected HashSet postAllow(){
+        HashSet<String> allow = new HashSet<String>();
+        allow.add("patient");
+        allow.add("staff");
+        return allow;
+    }
     @Override
     protected void processPostRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

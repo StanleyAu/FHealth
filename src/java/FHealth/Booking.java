@@ -20,13 +20,25 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.HashSet;
 
 /**
  *
  * @author Stan
  */
 public class Booking extends AuthServlet {
-
+    @Override
+    protected HashSet getAllow(){
+        HashSet<String> allow = new HashSet<String>();
+        allow.add("staff");
+        return allow;
+    }
+    @Override
+    protected HashSet postAllow(){
+        HashSet<String> allow = new HashSet<String>();
+        allow.add("staff");
+        return allow;
+    }
     @Override
     public void processGetRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -70,6 +82,8 @@ public class Booking extends AuthServlet {
         }
     }
 
+    
+    
     @Override
     public void processPostRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

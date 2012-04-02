@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import Auth.*;
 import com.google.gson.Gson;
 import java.util.HashMap;
+import java.util.HashSet;
 
 /**
  *
@@ -22,7 +23,18 @@ import java.util.HashMap;
  */
 @WebServlet(name = "Doctor", urlPatterns = {"/Doctor"})
 public class Doctor extends AuthServlet {
-
+    @Override
+    protected HashSet getAllow(){
+        HashSet<String> allow = new HashSet<String>();
+        allow.add("doctor");
+        return allow;
+    }
+    @Override
+    protected HashSet postAllow(){
+        HashSet<String> allow = new HashSet<String>();
+        allow.add("doctor");
+        return allow;
+    }
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and

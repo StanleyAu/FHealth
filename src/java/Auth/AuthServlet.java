@@ -7,13 +7,9 @@ package Auth;
 import java.util.*;
 import FHealth.BaseServlet;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -22,7 +18,12 @@ import javax.servlet.http.HttpSession;
 public class AuthServlet extends BaseServlet {
 
     UserBean currentUser;
-
+    protected HashSet<String> getAllow(){
+        return new HashSet<String>();
+    }
+    protected HashSet<String> postAllow(){
+        return new HashSet<String>();
+    }
     protected boolean isAuthValid(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         currentUser = this.getUser(request);
@@ -39,6 +40,22 @@ public class AuthServlet extends BaseServlet {
         return true;
     }
     
+    protected boolean isRoleAllowed(HttpServletRequest request, 
+            HttpServletResponse response, HashSet<String> allowed)
+            throws ServletException, IOException {
+        HashSet<String> allows = new HashSet<String> (allowed);
+        System.out.println(allowed.toString());
+        System.out.println(currentUser.getRoles().toString());
+        allows.retainAll(currentUser.getRoles());
+        if (allows.size() == 0) {
+            response.sendRedirect(
+                    response.encodeRedirectURL(
+                    "/FHealth/denied.jsp"));
+            return false;
+        }
+        return true;
+    }
+    
     protected ArrayList authMenuItems(){
         ArrayList menu_items = currentUser.menuItems();
         return menu_items;
@@ -47,7 +64,8 @@ public class AuthServlet extends BaseServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (this.isAuthValid(request, response)) {
+        if (this.isAuthValid(request, response) && 
+                isRoleAllowed(request, response, getAllow())) {
             request.setAttribute("menu_items", authMenuItems());
             request.setAttribute("user", currentUser);
             processGetRequest(request, response);
@@ -57,7 +75,8 @@ public class AuthServlet extends BaseServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (this.isAuthValid(request, response)) {
+        if (this.isAuthValid(request, response) && 
+                isRoleAllowed(request, response, postAllow())) {
             processPostRequest(request, response);
         }
     }
