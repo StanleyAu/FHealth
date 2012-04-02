@@ -130,3 +130,7 @@ select.drights {
 input.access {
     width:55px;
 }
+
+select#lb_pres:disabled option[selected] {
+    color: #ffffff;
+}
