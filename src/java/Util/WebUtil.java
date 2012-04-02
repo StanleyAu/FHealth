@@ -15,7 +15,9 @@ public class WebUtil {
     public static Gson gson = new Gson();
 
     public static String js_var(String var_name, Object obj) {
-        
+        if (obj == null) {
+            return "";
+        }
         String json = gson.toJson(obj, obj.getClass());
         String js_var = String.format("<script type='text/javascript'> "
                 + "var %s=%s;</script>", var_name, json);

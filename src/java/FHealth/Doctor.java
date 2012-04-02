@@ -69,6 +69,7 @@ public class Doctor extends AuthServlet {
                 + "join appointment a on a.patient_id = p.id "
                 + "where dp.doctor_id = %d "
                 + "group by p.id, p.first_name, p.last_name", d_id);
+        System.out.println(sql);
         ArrayList d_data = query(sql);
         System.out.println(d_data.toString());
         if (d_data.isEmpty()) {
