@@ -4,13 +4,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <% List<String> fields = Arrays.asList(
             "Appointment ID", "id",
-            "Diagnosis ID","diag_id",
+            "Diagnosis ID", "diag_id",
             "Date", "dt",
             "Patient Name", "patient",
-            "Diagnosis","diagnosis",
-            "Procedure","procedures",
-            "Comments","comments",
-            "Prescriptions","prescriptions");%>
+            "Diagnosis", "diagnosis",
+            "Procedure", "procedures",
+            "Comments", "comments",
+            "Prescriptions", "prescriptions",
+            "Status", "status");%>
 <html>
     <head>
         <title>Hospital Management Console</title>
@@ -53,11 +54,15 @@
                         <tr id='<%= i.toString()%>' class='<%= table_css%>'>
                             <% HashMap pa_data = (HashMap) a_data.get(i);
                              for (int j = 4; j < fields.size(); j += 2) {
+                                    Object val = pa_data.get(fields.get(j + 1));
+                                    if (val == null) {
+                                        val = "";
+                                    }
                                  if (j != 6) {
                             %>
-                            <td><%= pa_data.get(fields.get(j+1))%></td>
+                            <td><%= val%></td>
                             <% } else {%>
-                            <td><a href=<%="/FHealth/Patient?patient_id="+pa_data.get("patient_id")+"&editable=True&new_record=False"%>><%= pa_data.get(fields.get(j+1))%></a></td>
+                            <td><a href=<%="/FHealth/Patient?patient_id="+pa_data.get("patient_id")+"&editable=True&new_record=False"%>><%= val%></a></td>
                             <% } }%>
                             <td><a href=<%="/FHealth/booking?id="+pa_data.get("id")+"&editable=True"%>>Edit</a></td>
                         </tr>

@@ -37,11 +37,11 @@ public class Doctor_Diagnosis extends AuthServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String s_param;
-        
+
         Integer d_id = getIntParam(request, "doctor_id", null);
-        
+
         request.setAttribute("doctor_id", d_id);
-        if (d_id == null){
+        if (d_id == null) {
             PrintWriter out = response.getWriter();
             out.print("need doctor id");
             return;
@@ -50,7 +50,8 @@ public class Doctor_Diagnosis extends AuthServlet {
                 "select a.id,  concat(d.id) diag_id, dt, prescriptions, "
                 + "concat(first_name,' ',last_name) patient, "
                 + "diagnosis, "
-                + "procedures, comments, patient_id "
+                + "procedures, comments, patient_id, "
+                + "status "
                 + "from appointment a "
                 + "join patient p on a.patient_id = p.id "
                 + "left join diagnosis d on a.latest_diagnosis_id = d.id "
@@ -64,22 +65,26 @@ public class Doctor_Diagnosis extends AuthServlet {
         sql = "select * from prescription";
         ArrayList p_list = query(sql);
         HashMap drugs = new HashMap();
-        for (int j = 0; j < p_list.size(); j++) 
-        {
+        for (int j = 0; j < p_list.size(); j++) {
             HashMap drug = (HashMap) p_list.get(j);
-            drugs.put((Integer)drug.get("id"), drug.get("name"));
+            drugs.put((Integer) drug.get("id"), drug.get("name"));
         }
-        for (int i = 0; i < a_data.size(); i++){
-            HashMap hm = (HashMap)a_data.get(i);
-            String prescriptions = (String)hm.get("prescriptions");
-            String[] pres = prescriptions.split(",");
-            StringBuilder sb = new StringBuilder();
-            for (int k = 0; k < pres.length; k++) {
-                if (drugs.get(Integer.parseInt(pres[k])) != null)
-                    sb.append(drugs.get(Integer.parseInt(pres[k]))+",");
+        for (int i = 0; i < a_data.size(); i++) {
+            HashMap hm = (HashMap) a_data.get(i);
+            String prescriptions = (String) hm.get("prescriptions");
+            if (prescriptions != null) {
+                String[] pres = prescriptions.split(",");
+                StringBuilder sb = new StringBuilder();
+                for (int k = 0; k < pres.length; k++) {
+                    if (drugs.get(Integer.parseInt(pres[k])) != null) {
+                        sb.append(drugs.get(Integer.parseInt(pres[k])) + ",");
+                    }
+                }
+                sb.deleteCharAt(sb.length() - 1);
+                ((HashMap) a_data.get(i)).put("prescriptions", sb.toString());
+            } else {
+                ((HashMap) a_data.get(i)).put("prescriptions", "");
             }
-            sb.deleteCharAt(sb.length()-1);
-            ((HashMap)a_data.get(i)).put("prescriptions", sb.toString());
         }
         System.out.println(a_data.toString());
         request.setAttribute("a_data", a_data);
@@ -99,5 +104,4 @@ public class Doctor_Diagnosis extends AuthServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }
