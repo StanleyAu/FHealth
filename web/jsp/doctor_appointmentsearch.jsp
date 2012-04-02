@@ -55,7 +55,7 @@
                              for (int j = 4; j < fields.size(); j += 2) {%>
                             <td><%= pa_data.get(fields.get(j+1))%></td>
                             <% }%>
-                            <td><a href=<%="/FHealth/diagnosis?appointment_id="+pa_data.get("id")+"&new_record=False&editable=False"%>>Edit</a></td>
+                            <td><a href=<%="/FHealth/booking?id="+pa_data.get("id")+"&editable=True"%>>Edit</a></td>
                         </tr>
                         <%}%>
                     </tbody>
