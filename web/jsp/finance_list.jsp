@@ -36,11 +36,12 @@
                         for (itr = data.iterator(); itr.hasNext();) {
                             table_css = (i % 2 == 0) ? "second" : "";
                             HashMap hm = (HashMap) itr.next();
+                            int d_id = (Integer) hm.get("id");
                             String firstname = (String) hm.get("first_name");
                             String lastname = (String) hm.get("last_name");
                     %>
                     <tr class='<%=table_css%>'>
-                        <td><a href=<%="/FHealth/finance?fname=" + firstname + "&lname=" + lastname%>><%=firstname + " " + lastname%></a></td>
+                        <td><a href=<%="/FHealth/finance?id=" + d_id%>><%=firstname + " " + lastname%></a></td>
                     </tr>
                     <%i++;
                         }%>
