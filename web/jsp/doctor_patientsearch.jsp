@@ -7,7 +7,8 @@
             "First Name", "first_name",
             "Last Name", "last_name",
             "Last Visit", "last_visit",
-            "More Info", "more_info"
+            "More Info", "more_info",
+            "Access Rights", "doctor_list"
             );%>
 <html>
     <head>
@@ -19,6 +20,8 @@
         <script type="text/javascript" src="static/js/jquery.tablesorter.js"></script>
         <script type="text/javascript" src="static/js/tablesorter_filter.js"></script>
         <script type="text/javascript" src="static/js/doctor_patientsearch.js"></script>
+        <%= WebUtil.js_var("doc_data", (ArrayList)request.getAttribute("doc_data")) %>
+        <%= WebUtil.js_var("pat_id", (ArrayList)request.getAttribute("pat_id")) %>
         <%= WebUtil.js_var("doctor_id", (Integer) request.getAttribute("doctor_id"))%>
         <%=WebUtil.js_var("menu_items", request.getAttribute("menu_items"))%>
         <%=WebUtil.js_var("user", request.getAttribute("user"))%>
@@ -57,6 +60,7 @@
                             <td><%= pa_data.get(fields.get(7))%></td>
                             <td><a href=<%="/FHealth/appointment?patient_id="
                             +pa_data.get(fields.get(1))+"&editable=true"%>>view appointments</a></td>
+                            <td><input class="<%= fields.get(11)%>"></td>
                         </tr>
                         <%}%>
                     </tbody>

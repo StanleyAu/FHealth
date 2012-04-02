@@ -104,3 +104,11 @@ body {
 h1.titleblock {
     margin-left:10px;
 }
+
+select.drights {
+    width:100px;
+}
+
+input.access {
+    width:55px;
+}
