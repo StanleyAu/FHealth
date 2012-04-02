@@ -40,12 +40,15 @@ public class LoginServlet extends BaseServlet {
                 HttpSession session = request.getSession(true);
                 session.setAttribute("currentSessionUser", user);
                 String redir = request.getParameter("redir");
-                if (!redir.isEmpty()) {
+                if (!redir.isEmpty() && redir != null && !redir.equals("null")) {
                     response.sendRedirect(redir);
+                    System.out.println("Sent redirect with redir=" + redir);
                 }
-                response.sendRedirect("/FHealth/Home"); //logged-in page      		
+                response.sendRedirect("/FHealth/Home"); //logged-in page
+                return;
             } else {
                 response.sendRedirect("/FHealth/jsp/loginfail.jsp"); //error page 
+                return;
             }
         } catch (Throwable theException) {
             System.out.println(theException);
