@@ -10,6 +10,7 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.net.URLEncoder;
 
 /**
  *
@@ -31,10 +32,9 @@ public class AuthServlet extends BaseServlet {
         System.out.println(uri);
         if (currentUser == null) {
             response.sendRedirect(
-                    response.encodeRedirectURL(
                     "/FHealth/login?redir="
-                    + request.getRequestURI()
-                    + "?" + request.getQueryString()));
+                    + URLEncoder.encode(request.getRequestURI()
+                    + "?" + request.getQueryString(), "UTF-8"));
             return false;
         }
         return true;

@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.net.URLDecoder;
 
 public class LoginServlet extends BaseServlet {
 
@@ -40,6 +41,7 @@ public class LoginServlet extends BaseServlet {
                 HttpSession session = request.getSession(true);
                 session.setAttribute("currentSessionUser", user);
                 String redir = request.getParameter("redir");
+                redir = URLDecoder.decode(redir);
                 if (!redir.isEmpty() && redir != null && !redir.equals("null")) {
                     response.sendRedirect(redir);
                     System.out.println("Sent redirect with redir=" + redir);
