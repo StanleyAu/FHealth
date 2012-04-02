@@ -29,7 +29,6 @@
             </div>
         </div>
         <div class="content">
-            <div class='notification-text'></div>
             <form action="register" method="POST">
                 <div class="data-container">
                     <label for="firstname">First Name</label>

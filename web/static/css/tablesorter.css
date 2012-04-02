@@ -4,10 +4,6 @@ table.tablesorter {
 	width: 1000px;
 }
 
-table.tablesorter#patients {
-	width: 800px;
-}
-
 table.tablesorter thead tr th, table.tablesorter tfoot tr th {
 	background-color: #e6EEEE;
 	border: 1px solid #FFF;
@@ -22,16 +18,16 @@ table.tablesorter thead tr .header {
 }
 table.tablesorter tbody td {
 	color: #3D3D3D;
-        font-size: 1em;
-        text-align: center;
+    font-size: 1em;
+    text-align: center;
 	padding: 4px;
 	background-color: #FFF;
 	vertical-align: top;
 }
 table.tablesorter tbody .second td{
-        color: #3D3D3D;
-        font-size: 1em;
-        text-align: center;
+    color: #3D3D3D;
+    font-size: 1em;
+    text-align: center;
 	padding: 4px;
 	background-color: #F0F0F6;
 	vertical-align: top;
@@ -43,5 +39,5 @@ table.tablesorter thead tr .headerSortDown {
 	background-image: url(images/desc.gif);
 }
 table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
-background-color: #8dbdd8;
+    background-color: #8dbdd8;
 }

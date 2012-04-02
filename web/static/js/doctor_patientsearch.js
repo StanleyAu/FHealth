@@ -20,7 +20,7 @@ $(document).ready(function() {
                           filterColumns: [0,1],
                           filterCaseSensitive: false});
    create_doctor_dropdown();
-   $("select.drights").change(function() {
+   $("select.drights").click(function() {
        $("input.access").remove();
        var element = $(this);
        $.ajax({
@@ -37,7 +37,7 @@ $(document).ready(function() {
                }
            }
        }); 
-   });
+   }).click();
    $("tr").delegate("input.access", "click", function() {
        var ids = $(this).attr("id").split("for");
        $.ajax({
@@ -46,8 +46,9 @@ $(document).ready(function() {
            data: {"patid":ids[0], "docid":ids[1], "action":$(this).val(),
            "curdoc":window.doctor_id},
            success: function(json) {
-               alert(json);
-               $("input.access").remove();
+               console.log(json);
+               show_notification(json);
+               $("select.drights").click();
            }
        });
    });

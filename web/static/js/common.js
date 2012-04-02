@@ -26,11 +26,20 @@ function init_menu(){
   }
 }
 
+function show_notification(noti){
+  $('.content .notification-text')
+    .css('display','block')
+    .html(noti)
+    .fadeOut(3000);
+}
+
 function init_notification(){
+  var $noti = $('.notification-text');
+  if ($noti.length == 0){
+    $('.content').prepend("<div class='notification-text'></div>");
+  }
   if (window['notification_text'] != null){
-    $('.content .notification-text')
-        .html(window['notification_text'])
-        .fadeOut(3000);
+    show_notification(window['notification_text']);
   }
 }
 
