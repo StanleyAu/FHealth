@@ -54,7 +54,7 @@ public class Finance extends AuthServlet {
                     + "concat(first_name,' ',last_name) patient,"
                     + "status, a.id "
                     + "from appointment a "
-                    + "INNER JOIN patient p on a.patient_id = p.id"
+                    + "INNER JOIN patient p on a.patient_id = p.id "
                     + "WHERE doctor_id=" + doc_id;
             List dl = query(sql);
             request.setAttribute("data", dl);
