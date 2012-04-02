@@ -7,14 +7,14 @@
   if ((Boolean)request.getAttribute("editable") == true) {
         fields = Arrays.asList(
             "Diagnosis", "diagnosis",
-            "Perscriptions", "perscriptions",
+            "Prescriptions", "prescriptions",
             "Comments", "comments",
             "Procedures", "procedures");
   }
   else {
         fields = Arrays.asList(
             "Diagnosis", "diagnosis",
-            "Perscriptions", "perscriptions",
+            "Prescriptions", "prescriptions",
             "Procedures", "procedures");
   }
 %>
