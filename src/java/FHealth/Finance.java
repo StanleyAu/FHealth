@@ -53,7 +53,7 @@ public class Finance extends AuthServlet {
             String sql = "select dt,"
                             + "duration,"
                             + "concat(first_name,' ',last_name) patient,"
-                            + "status, concat(a.id) appointment_id "
+                            + "status, a.id "
                             + "from appointment a "
                             + "INNER JOIN patient p on a.patient_id = p.id";
             List dl = query(sql);
