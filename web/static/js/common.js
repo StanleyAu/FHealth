@@ -43,6 +43,15 @@ function init_notification(){
   }
 }
 
+function init_disabled(){
+  if(window.editable && 
+      (window.editable == false ||
+        window.editable == "False" ||
+        window.editable == "false")){
+    $('input, select, textarea').attr('disabled','disabled');
+  }
+}
+
 function replace_var(string){
   var replaced = string.replace('$(pid)', window.user.roles.patient)
         .replace('$(did)', window.user.roles.doctor)
@@ -70,5 +79,6 @@ $(document).ready(function(){
   init_var();
   init_menu();
   init_notification();
+  init_disabled();
   sync_height();
 });
