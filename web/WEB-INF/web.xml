@@ -47,6 +47,10 @@
         <servlet-name>Booking</servlet-name>
         <servlet-class>FHealth.Booking</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>FHealth.Logout</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AppController</servlet-name>
         <url-pattern>/AppController</url-pattern>
@@ -90,6 +94,10 @@
     <servlet-mapping>
         <servlet-name>Booking</servlet-name>
         <url-pattern>/booking</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
