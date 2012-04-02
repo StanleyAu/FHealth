@@ -69,4 +69,7 @@ $(document).ready(function(){
             $(e).attr("disabled", "disabled");
         });
     }
+    if (!window.user.roles.staff){
+        $('select').attr('disabled', 'disabled');
+    }
 });
