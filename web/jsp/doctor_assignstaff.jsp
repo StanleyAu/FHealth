@@ -14,6 +14,7 @@
         <script type="text/javascript" src="static/js/doctor_assignstaff.js"></script>
         <%=WebUtil.js_var("menu_items", request.getAttribute("menu_items"))%>
         <%=WebUtil.js_var("user", request.getAttribute("user"))%>
+        <%=WebUtil.js_var("sa_data", request.getAttribute("d_data"))%>
         <link rel="stylesheet" type="text/css" href="static/css/common.css"/>
         <link rel="stylesheet" type="text/css" href="static/css/tablesorter.css"/>
     </head>
@@ -64,6 +65,9 @@
                     <input name="filter" id="filter-box" value="" maxlength="10" size="10" type="text">
                     <input id="filter-clear-button" type="submit" value="Clear"/>
                 </div>
+            </div>
+            <div class="buttons-container">
+                <div class="button" id="update">Update</div>
             </div>
         </div>
     </body>
