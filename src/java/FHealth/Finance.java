@@ -36,7 +36,7 @@ public class Finance extends AuthServlet {
     protected void processGetRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if (request.getParameter("id") == null) {
-        //if (request.getParameter("fname") == null || request.getParameter("lname") == null) {
+            //if (request.getParameter("fname") == null || request.getParameter("lname") == null) {
             response.setContentType("text/html;charset=UTF-8");
             String sql = "select * from doctor";
             List dl = query(sql);
@@ -50,11 +50,11 @@ public class Finance extends AuthServlet {
             response.setContentType("text/html;charset=UTF-8");
             //Date comes in the YY/MM/DD format
             String sql = "select dt,"
-                            + "duration,"
-                            + "concat(first_name,' ',last_name) patient,"
-                            + "status, a.id "
-                            + "from appointment a "
-                            + "INNER JOIN patient p on a.patient_id = p.id";
+                    + "duration,"
+                    + "concat(first_name,' ',last_name) patient,"
+                    + "status, a.id "
+                    + "from appointment a "
+                    + "INNER JOIN patient p on a.patient_id = p.id"
                     + "WHERE doctor_id=" + doc_id;
             List dl = query(sql);
             request.setAttribute("data", dl);
