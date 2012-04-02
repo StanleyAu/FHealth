@@ -57,6 +57,7 @@ public class Finance extends AuthServlet {
                     + "INNER JOIN patient p on a.patient_id = p.id "
                     + "WHERE doctor_id=" + doc_id;
             List dl = query(sql);
+            request.setAttribute("doc_id", doc_id);
             request.setAttribute("data", dl);
             RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/finance_select.jsp");
             if (dispatcher != null) {
@@ -71,13 +72,15 @@ public class Finance extends AuthServlet {
         //Date comes in the YY/MM/DD format
         String beforedate = request.getParameter("beforeDate");
         String afterdate = request.getParameter("afterDate");
+        int doc_id = Integer.parseInt(request.getParameter("docid"));
         String sql = String.format("select dt,"
                 + "duration,"
                 + "concat(first_name,' ',last_name) patient,"
-                + "status, concat(a.id) appointment_id "
+                + "status, a.id "
                 + "from appointment a "
-                + "INNER JOIN patient p on a.patient_id = p.id"
-                + "where dt BETWEEN Date('%s') AND Date('%s')",
+                + "INNER JOIN patient p on a.patient_id = p.id "
+                + "where dt BETWEEN Date('%s') AND Date('%s') "
+                + "AND doctor_id=" + doc_id,
                 beforedate,
                 afterdate);
         List dl = query(sql);

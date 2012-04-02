@@ -17,6 +17,7 @@
     <script src="static/js/common.js"></script>
     <script src="static/js/financelist.js"></script>
     <script src="static/js/financeselect.js"></script>
+    <%=WebUtil.js_var("doc_id", request.getAttribute("doc_id"))%>
     <%=WebUtil.js_var("menu_items", request.getAttribute("menu_items"))%>
     <%=WebUtil.js_var("user", request.getAttribute("user"))%>
 </head>

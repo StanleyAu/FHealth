@@ -8,7 +8,7 @@ $(document).ready(function () {
        $.ajax({
            type: "POST",
            url: "/FHealth/finance",
-           data: {"beforeDate":beforedate, "afterDate":afterdate},
+           data: {"beforeDate":beforedate, "afterDate":afterdate, "docid":window.doc_id},
            success: function(json) {
             var i = 1;
             var htmlString = '';
@@ -20,6 +20,11 @@ $(document).ready(function () {
                                     '<td>'+columns.dt+'</td>'+
                                     '<td>'+columns.duration+'</td>'+
                                     '<td>'+columns.status+'</td>'+
+                                    '<td>'+columns.patient+'</td>'+
+                                    '<td><a href='+ 
+                                    '/FHealth/diagnosis?appointment_id='+
+                                    +columns.id+
+                                    '&new_record=False&editable=False">More Info</a>'+
                                     '</tr>');
                 i++;
             })
