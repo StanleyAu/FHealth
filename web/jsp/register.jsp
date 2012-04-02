@@ -31,14 +31,14 @@
         <div class="content">
             <form action="register" method="POST">
                 <div class="data-container">
-                    <label for="firstname">First Name</label>
-                    <input type="text" name="firstname" value=""><br />
-                    <label for="lastname">Last Name</label>
-                    <input type="text" name="lastname" value=""><br />
                     <label for="username">Username</label>
                     <input type="text" name="username" value=""><br/>
                     <label for="password">Password</label>
                     <input type="text" name="password" value=""><br/>
+                    <label for="firstname">First Name</label>
+                    <input type="text" name="firstname" value=""><br />
+                    <label for="lastname">Last Name</label>
+                    <input type="text" name="lastname" value=""><br />
                     <label for="ohip">OHIP</label>
                     <input type="text" name="ohip" value=""><br />
                     <label for="sin">SIN</label>
