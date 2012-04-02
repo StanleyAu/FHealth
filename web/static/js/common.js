@@ -3,6 +3,37 @@ function sync_height(){
     Math.max(window.innerHeight, $(document).height()));
 }
 
+function init_var(){
+  var url_search = top.location.search;
+  $.each(url_search.substr(1).split('&'), function(i, kv){
+    var kv_split = kv.split('=');
+    if (window[kv_split[0]] == null){
+      window[kv_split[0]]=decodeURIComponent(kv_split[1]);
+    }
+  });
+}
+
+function init_menu(){
+  var $lp = $('.left-pane');
+  $lp.append(make_menu_header());
+  if (window.menu_items){
+      $.each(window.menu_items,function(i, role_item){
+          $lp.append(make_menu_role(role_item[0][1]));
+          $.each(role_item[1], function(i, role_action){
+              $lp.append(make_role_action(role_action));
+          })
+      })
+  }
+}
+
+function init_notification(){
+  if (window['notification_text'] != null){
+    $('.content .notification-text')
+        .html(window['notification_text'])
+        .fadeOut(3000);
+  }
+}
+
 function replace_var(string){
   var replaced = string.replace('$(pid)', window.user.roles.patient)
         .replace('$(did)', window.user.roles.doctor)
@@ -26,20 +57,9 @@ function make_role_action(action){
   return role_action;  
 }
 
-function init_menu(){
-  var $lp = $('.left-pane');
-  $lp.append(make_menu_header());
-  if (window.menu_items){
-      $.each(window.menu_items,function(i, role_item){
-          $lp.append(make_menu_role(role_item[0][1]));
-          $.each(role_item[1], function(i, role_action){
-              $lp.append(make_role_action(role_action));
-          })
-      })
-  }
-}
-
 $(document).ready(function(){
+  init_var();
   init_menu();
+  init_notification();
   sync_height();
 });

@@ -83,6 +83,11 @@ body {
   moz-border-radius: 15px;
 }
 
+.content .notification-text {
+  font-size: 1.3em;
+  background-color: #afdcec;
+}
+
 .content .response-text {
   font-size: 1.1em;
   text-align: right;

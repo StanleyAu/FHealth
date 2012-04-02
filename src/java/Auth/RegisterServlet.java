@@ -60,8 +60,8 @@ public class RegisterServlet extends AuthServlet {
 
             if (user.isValid()) {
                 HttpSession session = request.getSession(true);
-                session.setAttribute("currentSessionUser", user);
-                response.sendRedirect("/FHealth/jsp/loginsuccess.jsp"); //logged-in page
+                response.sendRedirect("/FHealth/register?"
+                        + "notification_text=Registration%20Success"); //logged-in page
             } else {
                 response.sendRedirect("/FHealth/jsp/loginfail.jsp"); //error page
             }

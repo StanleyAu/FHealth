@@ -174,6 +174,7 @@ public class UserDAO {
                 result = DatabaseFactory.getInstance().update(credstmt);
                 System.out.println("Add Staff: " + result);
             }
+            bean.setValid(true);
         } catch (SQLException e) {
             e.printStackTrace();
         }
