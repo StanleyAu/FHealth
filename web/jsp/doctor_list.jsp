@@ -14,7 +14,6 @@
         <script type="text/javascript" src="static/js/doctor_patientsearch.js"></script>
         <%=WebUtil.js_var("menu_items", request.getAttribute("menu_items"))%>
         <%=WebUtil.js_var("user", request.getAttribute("user"))%>
-        <%= WebUtil.js_var("doctor_id", (Integer) request.getAttribute("doctor_id"))%>
         <link rel="stylesheet" type="text/css" href="static/css/common.css"/>
         <link rel="stylesheet" type="text/css" href="static/css/tablesorter.css"/>
     </head>
@@ -37,7 +36,7 @@
                     </tr></thead>
                     <tbody id="apptbody">
                         <%
-                            ArrayList pas_data = (ArrayList) request.getAttribute("data");
+                            ArrayList pas_data = (ArrayList) request.getAttribute("d_data");
                             String table_css = "";
                             for (Integer i = 0; i < pas_data.size(); i++) {
                                 table_css = (i % 2 != 0) ? "second" : "";
@@ -47,7 +46,7 @@
                             for (int j = 0; j < fields.size(); j += 2) {%>
                             <td><%= pa_data.get(fields.get(j + 1))%></td>                
                             <% }%>
-                            <td><a href="">Appointments</a></td>
+                            <td><a href=<%="doctor_diagnosis?doctor_id="+pa_data.get("doctor_id")%>>Appointments</a></td>
                         </tr>
                         <%}%>
                     </tbody>

@@ -22,14 +22,16 @@ public class DoctorList extends AuthServlet {
         if (d_id != null) {
             sql = String.format(
                     "select staff_id, "
-                    + "concat(first_name,' ',last_name) doctor, "
+                    + "concat(first_name,' ',last_name) doctor,"
+                    + "sa.doctor_id "
                     + "from staff_assignment sa "
                     + "join doctor d on sa.doctor_id = d.id "
                     + "where sa.staff_id = %d", d_id);
         }
         else {
             sql = "select staff_id, "
-                    + "concat(first_name,' ',last_name) doctor, "
+                    + "concat(first_name,' ',last_name) doctor,"
+                    + "sa.doctor_id "
                     + "from staff_assignment sa "
                     + "join doctor d on sa.doctor_id = d.id ";
         }
@@ -42,7 +44,7 @@ public class DoctorList extends AuthServlet {
         request.setAttribute("d_data", d_data);
         
         
-        RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/doctorlist.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/doctor_list.jsp");
         if (dispatcher != null) {
             dispatcher.forward(request, response);
         }

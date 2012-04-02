@@ -21,7 +21,7 @@ public class UserBean {
             + "]],"
             + "[['staff', 'Staff'],["
                 + "['List Doctors', 'listdoctor?staff_id=$(did)'],"
-                + "['Book Appointment', '']"
+                + "['Book Appointment', 'booking']"
             + "]],"
             + "[['patient', 'Patient'],["
                 + "['Update Profile','Patient?patient_id=$(pid)'],"

@@ -54,7 +54,6 @@ public class BaseServlet extends HttpServlet {
     protected Integer getIntParam(HttpServletRequest request, String key,
             Integer default_value) {
         String s_param = request.getParameter(key);
-        System.out.println("Not broken on getParam: " + s_param);
         Integer value;
         if (s_param == null) {
                 if (default_value == null) {
@@ -67,7 +66,6 @@ public class BaseServlet extends HttpServlet {
         else {
             value = Integer.parseInt(s_param);
         }
-        System.out.println("Not broken on ternary op");
         return value;
     }
 

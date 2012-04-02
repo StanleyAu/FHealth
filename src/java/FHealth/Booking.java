@@ -132,7 +132,8 @@ public class Booking extends AuthServlet {
             e.printStackTrace();
         }
 
-        response.sendRedirect("booking?id=" + a_id);
+        response.sendRedirect("booking?editable=true&"
+                + "notification_text="+post_type+"%20Success&id=" + a_id);
         /*
          * //Dispatching request RequestDispatcher dispatcher =
          * request.getRequestDispatcher("booking"); if (dispatcher != null) {

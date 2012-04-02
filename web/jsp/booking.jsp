@@ -11,15 +11,19 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Hospital Management Console - Schedule Appointment</title>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
-        <script src="static/js/common.js"></script>
-        <script src="static/js/jquery.timePicker.min.js"></script>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all" />
-        <link rel='stylesheet' type='text/css' href='static/css/common.css'>
         <link rel='stylesheet' type='text/css' href='static/css/tables.css'>
         <link rel='stylesheet' type='text/css' href='static/css/timePicker.css'>
+        <link rel="stylesheet" type="text/css" href="static/css/common.css"/>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="static/js/common.js"></script>
+        <script type="text/javascript" src="static/js/jquery.timePicker.min.js"></script>
+        <%=WebUtil.js_var("menu_items", request.getAttribute("menu_items"))%>
+        <%=WebUtil.js_var("user", request.getAttribute("user"))%>
+        <title>Hospital Management Console - Schedule Appointment</title>
+        
     </head>
     <body>
         <script>
@@ -76,7 +80,6 @@
         </div>
         <div class="left-pane-container">
             <div class="left-pane">
-                <div class="menu-item">MENU ITEM</div>
             </div>
         </div>
         <div class="content">
