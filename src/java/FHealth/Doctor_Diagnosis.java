@@ -50,7 +50,7 @@ public class Doctor_Diagnosis extends AuthServlet {
                 "select a.id,  concat(d.id) diag_id, dt, prescriptions, "
                 + "concat(first_name,' ',last_name) patient, "
                 + "diagnosis, "
-                + "procedures, comments "
+                + "procedures, comments, patient_id "
                 + "from appointment a "
                 + "join patient p on a.patient_id = p.id "
                 + "left join diagnosis d on a.latest_diagnosis_id = d.id "

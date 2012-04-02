@@ -41,7 +41,7 @@
                             <% for (int i = 4; i < fields.size(); i += 2) {%>
                             <th><%= fields.get(i)%></th>
                             <% }%>
-                            <th>Edit</th>
+                            <th>Change Booking</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,9 +52,13 @@
                         %>
                         <tr id='<%= i.toString()%>' class='<%= table_css%>'>
                             <% HashMap pa_data = (HashMap) a_data.get(i);
-                             for (int j = 4; j < fields.size(); j += 2) {%>
+                             for (int j = 4; j < fields.size(); j += 2) {
+                                 if (j != 6) {
+                            %>
                             <td><%= pa_data.get(fields.get(j+1))%></td>
-                            <% }%>
+                            <% } else {%>
+                            <td><a href=<%="/FHealth/Patient?patient_id="+pa_data.get("patient_id")+"&editable=True&new_record=False"%>><%= pa_data.get(fields.get(j+1))%></a></td>
+                            <% } }%>
                             <td><a href=<%="/FHealth/booking?id="+pa_data.get("id")+"&editable=True"%>>Edit</a></td>
                         </tr>
                         <%}%>
