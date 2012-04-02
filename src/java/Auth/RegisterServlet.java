@@ -11,12 +11,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  *
  * @author Stan
  */
 public class RegisterServlet extends AuthServlet {
+    @Override
+    protected HashSet getAllow(){
+        HashSet<String> allow = new HashSet<String>();
+        allow.add("admin");
+        allow.add("staff");
+        return allow;
+    }
+    @Override
+    protected HashSet postAllow(){
+        HashSet<String> allow = new HashSet<String>();
+        allow.add("admin");
+        allow.add("staff");
+        return allow;
+    }
 
     @Override
     public void processGetRequest(HttpServletRequest request, HttpServletResponse response)

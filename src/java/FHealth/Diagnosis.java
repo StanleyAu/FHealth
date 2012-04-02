@@ -87,13 +87,13 @@ public class Diagnosis extends AuthServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         Integer p_id = getIntParam(request, "appointment_id", null);
-        Boolean new_record = getBoolParam(request, "new_record", Boolean.FALSE);
+        Boolean new_record = getBoolParam(request, "new_record", Boolean.TRUE);
         Boolean editable = getBoolParam(request, "editable", Boolean.FALSE);
         
-        request.setAttribute("new_record", new_record);
+        request.setAttribute("new_record", Boolean.TRUE);
         request.setAttribute("editable", editable);
         request.setAttribute("appointment_id", p_id);
-        if (!new_record){
+        if (new_record){
             if (p_id == null){
                 PrintWriter out = response.getWriter();
                 out.print("need appointment id");

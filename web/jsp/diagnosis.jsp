@@ -28,7 +28,7 @@
         <%=WebUtil.js_var("menu_items", request.getAttribute("menu_items"))%>
         <%=WebUtil.js_var("user", request.getAttribute("user"))%>
         <%= (Boolean)request.getAttribute("new_record")?
-            "":WebUtil.js_var("p_data", (HashMap)request.getAttribute("p_data")) %>
+            WebUtil.js_var("p_data", (HashMap)request.getAttribute("p_data")):"" %>
         <title>Hospital Management Console</title>
     </head>
     <body>
@@ -44,14 +44,14 @@
             <% Boolean new_record = (Boolean) request.getAttribute("new_record");
                 Boolean editable = (Boolean) request.getAttribute("editable");
                 HashMap p_data = new HashMap();
-                if (!new_record) {
+                if (new_record) {
                     p_data = (HashMap) request.getAttribute("p_data");
                 }
                 for (int i = 0; i < fields.size(); i += 2) {%>
             <label class="textarea" for="<%= fields.get(i + 1)%>">
                 <%= fields.get(i)%></label>
             <textarea name="<%= fields.get(i + 1)%>"><%= (new_record)?
-                "":p_data.get(fields.get(i + 1))%></textarea><br/>
+                p_data.get(fields.get(i + 1)):""%></textarea><br/>
             <% }%>
             <input type="hidden" name="appointment_id" 
                    value="<%=request.getAttribute("appointment_id")%>"

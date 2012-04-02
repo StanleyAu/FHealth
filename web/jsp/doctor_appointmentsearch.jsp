@@ -43,6 +43,7 @@
                             <th><%= fields.get(i)%></th>
                             <% }%>
                             <th>Change Booking</th>
+                            <th>Change Diagnosis</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -65,6 +66,7 @@
                             <td><a href=<%="/FHealth/Patient?patient_id="+pa_data.get("patient_id")+"&editable=True&new_record=False"%>><%= val%></a></td>
                             <% } }%>
                             <td><a href=<%="/FHealth/booking?id="+pa_data.get("id")+"&editable=True"%>>Edit</a></td>
+                            <td><a href=<%="/FHealth/diagnosis?appointment_id="+pa_data.get("id")+"&editable=true&new_record=true"%>>Edit</a></td>
                         </tr>
                         <%}%>
                     </tbody>
